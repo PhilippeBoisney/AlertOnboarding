@@ -95,10 +95,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
-        if pageControl != nil {
-            self.pageControl.currentPage = realIndex
-        }
-        
+                
         return pageContentViewController
     }
     

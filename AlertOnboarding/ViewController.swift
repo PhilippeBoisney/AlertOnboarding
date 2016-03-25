@@ -20,9 +20,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
-        alertView.show()
-        
+        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
+    
     }
     @IBAction func onTouchLol(sender: AnyObject) {
         self.alertView.hide()
@@ -42,6 +41,10 @@ class ViewController: UIViewController {
         
         self.alertView.colorPageIndicator = UIColor.whiteColor()
         self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)  
+        
+        self.alertView.purcentageRatioHeight = 0.5
+        self.alertView.purcentageRatioWidth = 0.5
+        
         */
         
         self.alertView.show()
