@@ -11,6 +11,6 @@ s.platform     = :ios, '8.0'
 s.requires_arc = true
 
 # If more than one source file: https://guides.cocoapods.org/syntax/podspec.html#source_files
-spec.source_files = 'AlertOnboarding/AlertChildPageViewController.swift', 'AlertOnboarding/AlertOnboarding.swift', 'AlertOnboarding/AlertChildPageViewController.xib', 'AlertOnboarding/AlertPageViewController.swift'
+s.source_files = 'Classes/*'
 
 end
