@@ -1,5 +1,5 @@
 # AlertOnboarding
-A simple and handsome AlertView for **onboard your users** in your amazing world.
+A simple and attractive AlertView **to onboard your users** in your amazing world.
 
 [![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
 )](https://developer.apple.com/iphone/index.action)
@@ -9,7 +9,7 @@ A simple and handsome AlertView for **onboard your users** in your amazing world
 )](http://mit-license.org)
 
 ## PRESENTATION
-This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.com/shots/2422143-Space-onboarding). It will help you to maximise, simply, your onboarding on your app.
+This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.com/shots/2422143-Space-onboarding). It will help you to maximise, simply, onboarding process on your app.
 
 ## SCREENSHOT
 <p align="center">
