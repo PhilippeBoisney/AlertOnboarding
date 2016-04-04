@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="9yY-8z-vVP" customClass="AlertChildPageViewController" customModule="AlertOnboarding" customModuleProvider="target">
+        <viewController id="9yY-8z-vVP" customClass="AlertChildPageViewController" customModule="AlertOnboarding">
             <layoutGuides>
                 <viewControllerLayoutGuide type="top" id="ycd-Pw-R82"/>
                 <viewControllerLayoutGuide type="bottom" id="Im8-uj-BfB"/>

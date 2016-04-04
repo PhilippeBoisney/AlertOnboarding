@@ -9,7 +9,7 @@
 import UIKit
 
 class AlertPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-
+    
     //FOR DESIGN
     var pageController: UIPageViewController!
     var pageControl: UIPageControl!
@@ -36,7 +36,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         self.configurePageViewController()
         self.configurePageControl()
         
@@ -85,17 +85,25 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
-        //Get All Bundle
-        let allBundle = NSBundle.allBundles()
+        
         var pageContentViewController: AlertChildPageViewController!
-        //Check if file exist
-        for bundle in allBundle {
-            if let path = bundle.pathForResource("AlertChildPageViewController", ofType: "nib") {
-                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+        let podBundle = NSBundle(forClass: self.classForCoder)
+        
+        //FROM COCOAPOD
+        if let bundleURL = podBundle.URLForResource("AlertOnboardingXib", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+                
+            } else {
+                
+                assertionFailure("Could not load the bundle")
+                
             }
+            //FROM MANUAL INSTALL
+        }else {
+            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
         }
         
-        _ = pageContentViewController.view
         pageContentViewController.pageIndex = index // 0
         
         let realIndex = arrayOfImage.count - index - 1
@@ -105,7 +113,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
-                
+        
         return pageContentViewController
     }
     
@@ -157,7 +165,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.addChildViewController(self.pageController)
     }
     
-    func configureConstraintsForPageControl() {        
+    func configureConstraintsForPageControl() {
         let alertViewSizeHeight = UIScreen.mainScreen().bounds.height*0.8
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
         self.pageControl.frame = CGRectMake(0, positionX, self.view.bounds.width, 50)
