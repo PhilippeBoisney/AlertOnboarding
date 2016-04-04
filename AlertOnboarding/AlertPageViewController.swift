@@ -85,7 +85,18 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
-        let pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+        //Get All Bundle
+        let allBundle = NSBundle.allBundles()
+        var pageContentViewController: AlertChildPageViewController!
+        for bundle in allBundle {
+            
+            if let path = bundle.pathForResource("AlertChildPageViewController", ofType: "nib") {
+                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+            }
+            
+        }
+        
+        _ = pageContentViewController.view
         pageContentViewController.pageIndex = index // 0
         
         let realIndex = arrayOfImage.count - index - 1

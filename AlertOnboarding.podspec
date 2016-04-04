@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "AlertOnboarding"
-s.version          = "1.0"
+s.version          = "1.1"
 s.summary          = "AlertOnboarding"
 s.description      = "A simple and handsome AlertView for onboard your users in your amazing world."
 s.homepage         = "https://github.com/PhilippeBoisney/AlertOnboarding"
@@ -11,6 +11,7 @@ s.platform     = :ios, '8.0'
 s.requires_arc = true
 
 # If more than one source file: https://guides.cocoapods.org/syntax/podspec.html#source_files
-s.source_files = 'Classes/*'
+s.source_files = 'Classes/*.swift'
+s.resources = 'Classes/*.xib'
 
 end
