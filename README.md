@@ -78,7 +78,7 @@ self.alertView.titleGotItButton = "UNDERSTOOD !"
 - [x] Fully customisable
 
 ## Version
-1.3.0
+1.4
 
 ## Author
 Philippe BOISNEY (phil.boisney(@)gmail.com)
