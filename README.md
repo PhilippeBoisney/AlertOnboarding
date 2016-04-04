@@ -15,10 +15,6 @@ This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.co
 <p align="center">
   <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/screenshot.png"/>
 </p>
-## DEMO
-<p align="center">
-  <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/demo.gif"/>
-</p>
 
 ## INSTALLATION
 ####COCOAPODS
@@ -79,9 +75,10 @@ self.alertView.titleGotItButton = "UNDERSTOOD !"
 ## FEATURES
 - [x] Multi-Device Full Support
 - [x] Rotation Support
+- [x] Fully customisable
 
 ## Version
-1.0.0
+1.3.0
 
 ## Author
 Philippe BOISNEY (phil.boisney(@)gmail.com)
