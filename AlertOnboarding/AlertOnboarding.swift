@@ -10,7 +10,7 @@
 import UIKit
 
 public class AlertOnboarding: UIView {
-   
+    
     //FOR DATA  ------------------------
     private var arrayOfImage = [String]()
     private var arrayOfTitle = [String]()
@@ -19,6 +19,7 @@ public class AlertOnboarding: UIView {
     //FOR DESIGN    ------------------------
     public var buttonBottom: UIButton!
     private var container: AlertPageViewController!
+    public var background: UIView!
     
     
     //PUBLIC VARS   ------------------------
@@ -89,6 +90,7 @@ public class AlertOnboarding: UIView {
         // Find current stop viewcontroller
         if let topController = getTopViewController() {
             let superView: UIView = topController.view
+            superView.addSubview(self.background)
             superView.addSubview(self)
             self.configureConstraints(topController.view)
             self.animateForOpening()
@@ -107,26 +109,32 @@ public class AlertOnboarding: UIView {
     //------------------------------------------------------------------------------------------
     // MARK: PRIVATE FUNCTIONS    --------------------------------------------------------------
     //------------------------------------------------------------------------------------------
-
-   
+    
+    
     //MARK: FOR CONFIGURATION    --------------------------------------
-    private func configure(arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {        
+    private func configure(arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         
         self.buttonBottom = UIButton(frame: CGRectMake(0,0, 0, 0))
         self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
         self.buttonBottom.addTarget(self, action: Selector("onClick"), forControlEvents: .TouchUpInside)
         
+        self.background = UIView(frame: CGRectMake(0,0, 0, 0))
+        self.background.backgroundColor = UIColor.blackColor()
+        self.background.alpha = 0.5
+        
+        
         self.clipsToBounds = true
         self.layer.cornerRadius = 10
     }
-
+    
     
     private func configureConstraints(superView: UIView) {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.buttonBottom.translatesAutoresizingMaskIntoConstraints = false
         self.container.view.translatesAutoresizingMaskIntoConstraints = false
-       
+        self.background.translatesAutoresizingMaskIntoConstraints = false
+        
         self.removeConstraints(self.constraints)
         self.buttonBottom.removeConstraints(self.buttonBottom.constraints)
         self.container.view.removeConstraints(self.container.view.constraints)
@@ -153,9 +161,14 @@ public class AlertOnboarding: UIView {
         let pinContraintsForContainer = NSLayoutConstraint(item: self.container.view, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0)
         
         
+        //Constraints for background
+        let widthContraintsForBackground = NSLayoutConstraint(item: self.background, attribute:.Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: UIScreen.mainScreen().bounds.width)
+        let heightConstraintForBackground = NSLayoutConstraint.init(item: self.background, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: UIScreen.mainScreen().bounds.height)
+        
         NSLayoutConstraint.activateConstraints([horizontalContraintsAlertView, verticalContraintsAlertView,heightConstraintForAlertView, widthConstraintForAlertView,
             verticalContraintsButtonBottom, heightConstraintForButtonBottom, widthConstraintForButtonBottom, pinContraintsButtonBottom,
-            verticalContraintsForContainer, heightConstraintForContainer, widthConstraintForContainer, pinContraintsForContainer])
+            verticalContraintsForContainer, heightConstraintForContainer, widthConstraintForContainer, pinContraintsForContainer,
+            widthContraintsForBackground, heightConstraintForBackground])
     }
     
     //MARK: FOR ANIMATIONS ---------------------------------
@@ -164,20 +177,22 @@ public class AlertOnboarding: UIView {
         self.transform = CGAffineTransformMakeScale(0.3, 0.3)
         UIView.animateWithDuration(1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
             self.transform = CGAffineTransformMakeScale(1, 1)
-        }, completion: nil)
+            }, completion: nil)
     }
     
     private func animateForEnding(){
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.alpha = 0.0
             }, completion: {
-                (finished: Bool) -> Void in                
+                (finished: Bool) -> Void in
                 // On main thread
                 dispatch_async(dispatch_get_main_queue()) {
                     () -> Void in
+                    self.background.removeFromSuperview()
                     self.removeFromSuperview()
                     self.container.removeFromParentViewController()
                     self.container.view.removeFromSuperview()
+                    
                 }
         })
     }
@@ -208,5 +223,5 @@ public class AlertOnboarding: UIView {
             self.container.configureConstraintsForPageControl()
         }
     }
-
+    
 }
