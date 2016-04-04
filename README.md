@@ -21,12 +21,11 @@ This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.co
 </p>
 
 ## INSTALLATION
-####Manually
-Simply add those 4 files on your iOS project:
-- **AlertOnboarding.swift**
-- **AlertChildPageViewController.swift**
-- **AlertPageViewController.swift**
-- **AlertChildPageViewController.xib**
+####COCOAPODS
+```
+pod 'AlertOnboarding'
+```
+
 
 ## USAGE
 ```swift
