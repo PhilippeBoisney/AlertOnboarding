@@ -70,6 +70,10 @@ self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, 
 self.alertView.purcentageRatioHeight = 0.5
 self.alertView.purcentageRatioWidth = 0.5
 
+//Modify labels
+self.alertView.titleSkipButton = "PASS"
+self.alertView.titleGotItButton = "UNDERSTOOD !"
+
 ```
 
 ## FEATURES
