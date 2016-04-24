@@ -12,11 +12,12 @@ A simple and attractive AlertView **to onboard your users** in your amazing worl
 This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.com/shots/2422143-Space-onboarding). It will help you to maximise, simply, onboarding process on your app.
 
 ## DEMO
- <p align="center">
-   <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/demo.gif", width=200, height=350, align="left"/>
-  <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/screenshot.png", height=350, align= "right"/>
+<p align="center">
+ <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/demo.gif", width=200, height=350, align="left"/>
+ </br>
+ </br>
+ <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/screenshot.png", height=350/>
 </p>
-
 
 ## INSTALLATION
 ####COCOAPODS
