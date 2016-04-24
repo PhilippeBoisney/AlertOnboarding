@@ -14,8 +14,6 @@ This AlertOnboarding was inspired by [this amazing dribbble](https://dribbble.co
 ## DEMO
 <p align="center">
  <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/demo.gif", width=200, height=350, align="left"/>
- </br>
- </br>
  <img src ="https://raw.githubusercontent.com/PhilippeBoisney/AlertOnboarding/master/screenshot.png", height=350/>
 </p>
 
