@@ -162,8 +162,8 @@ public class AlertOnboarding: UIView {
         
         
         //Constraints for background
-        let widthContraintsForBackground = NSLayoutConstraint(item: self.background, attribute:.Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: UIScreen.mainScreen().bounds.width)
-        let heightConstraintForBackground = NSLayoutConstraint.init(item: self.background, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: UIScreen.mainScreen().bounds.height)
+        let widthContraintsForBackground = NSLayoutConstraint(item: self.background, attribute:.Width, relatedBy: .Equal, toItem: superView, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraintForBackground = NSLayoutConstraint.init(item: self.background, attribute: .Height, relatedBy: .Equal, toItem: superView, attribute: .Height, multiplier: 1, constant: 0)
         
         NSLayoutConstraint.activateConstraints([horizontalContraintsAlertView, verticalContraintsAlertView,heightConstraintForAlertView, widthConstraintForAlertView,
             verticalContraintsButtonBottom, heightConstraintForButtonBottom, widthConstraintForButtonBottom, pinContraintsButtonBottom,

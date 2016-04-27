@@ -142,7 +142,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     //MARK: CONFIGURATION ---------------------------------------------------------------------------------
     private func configurePageControl() {
         self.pageControl = UIPageControl(frame: CGRectMake(0,0,0,0))
-        self.pageControl.backgroundColor = alertview.colorForAlertViewBackground
+        self.pageControl.backgroundColor = UIColor.clearColor()
         self.pageControl.pageIndicatorTintColor = alertview.colorPageIndicator
         self.pageControl.currentPageIndicatorTintColor = alertview.colorCurrentPageIndicator
         self.pageControl.numberOfPages = arrayOfImage.count
@@ -155,6 +155,16 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     private func configurePageViewController(){
         self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageController.view.backgroundColor = UIColor.clearColor()
+        
+        if #available(iOS 9.0, *) {
+            let pageControl = UIPageControl.appearanceWhenContainedInInstancesOfClasses([AlertPageViewController.self])
+            pageControl.pageIndicatorTintColor = UIColor.clearColor()
+            pageControl.currentPageIndicatorTintColor = UIColor.clearColor()
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
         self.pageController.dataSource = self
         self.pageController.delegate = self
         
