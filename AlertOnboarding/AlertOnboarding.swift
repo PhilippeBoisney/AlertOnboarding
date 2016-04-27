@@ -116,7 +116,7 @@ public class AlertOnboarding: UIView {
         
         self.buttonBottom = UIButton(frame: CGRectMake(0,0, 0, 0))
         self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
-        self.buttonBottom.addTarget(self, action: Selector("onClick"), forControlEvents: .TouchUpInside)
+        self.buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), forControlEvents: .TouchUpInside)
         
         self.background = UIView(frame: CGRectMake(0,0, 0, 0))
         self.background.backgroundColor = UIColor.blackColor()
@@ -214,7 +214,7 @@ public class AlertOnboarding: UIView {
     
     private func interceptOrientationChange(){
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOrientationChange", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlertOnboarding.onOrientationChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     func onOrientationChange(){

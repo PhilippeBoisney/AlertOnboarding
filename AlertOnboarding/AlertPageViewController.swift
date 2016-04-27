@@ -66,7 +66,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             return nil
         }
         
-        index--
+        index -= 1
         return self.viewControllerAtIndex(index)
     }
     
@@ -74,7 +74,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         var index = (viewController as! AlertChildPageViewController).pageIndex!
         
-        index++
+        index += 1
         
         if(index == arrayOfImage.count){
             return nil
