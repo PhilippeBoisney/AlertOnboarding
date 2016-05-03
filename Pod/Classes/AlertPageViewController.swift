@@ -176,7 +176,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func configureConstraintsForPageControl() {
-        let alertViewSizeHeight = UIScreen.mainScreen().bounds.height*0.8
+        let alertViewSizeHeight = UIScreen.mainScreen().bounds.height*alertview.percentageRatioHeight
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
         self.pageControl.frame = CGRectMake(0, positionX, self.view.bounds.width, 50)
     }
