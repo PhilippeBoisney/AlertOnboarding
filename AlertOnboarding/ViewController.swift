@@ -31,7 +31,7 @@ class ViewController: UIViewController {
        
         /*
         
-        IF YOU WANT TO CUSTOM ALERTVIEW
+        //IF YOU WANT TO CUSTOM ALERTVIEW
         self.alertView.colorForAlertViewBackground = UIColor(red: 173/255, green: 206/255, blue: 183/255, alpha: 1.0)
         self.alertView.colorButtonText = UIColor.whiteColor()
         self.alertView.colorButtonBottomBackground = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)
@@ -42,12 +42,15 @@ class ViewController: UIViewController {
         self.alertView.colorPageIndicator = UIColor.whiteColor()
         self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)  
         
-        self.alertView.purcentageRatioHeight = 0.5
-        self.alertView.purcentageRatioWidth = 0.5
-        
-        */
+        self.alertView.percentageRatioHeight = 0.5
+        self.alertView.percentageRatioWidth = 0.5
+ 
+         */        
+ 
         
         self.alertView.show()
+ 
+ 
     }
 
 }
