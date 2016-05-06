@@ -72,6 +72,30 @@ self.alertView.titleSkipButton = "PASS"
 self.alertView.titleGotItButton = "UNDERSTOOD !"
 
 ```
+**AlertOnboardingDelegate**
+
+If you want to know when the user completes onboarding, skips onboarding, or triggers the next step, you can use the `AlertOnboardingDelegate` to listen for these updates.
+
+```swift
+
+//... when initialising AlertOnboarding
+alertView.delegate = self
+
+//... inside your class that conforms to AlertOnboardingDelegate
+
+func alertOnboardingSkipped(lastStep: Int) {
+   print("Onboarding skipped! Last step: \(lastStep)")
+}
+
+func alertOnboardingCompleted() {
+   print("Onboarding completed!")
+}
+
+func alertOnboardingNext(nextStep: Int) {
+   print("Next step triggered! \(nextStep)")
+}
+
+```
 
 ## FEATURES
 - [x] Multi-Device Full Support
