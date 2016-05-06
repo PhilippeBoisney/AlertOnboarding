@@ -9,7 +9,13 @@
 
 import UIKit
 
-public class AlertOnboarding: UIView {
+public protocol AlertOnboardingDelegate {
+    func alertOnboardingSkipped(lastStep: Int)
+    func alertOnboardingCompleted()
+    func alertOnboardingNext(nextStep: Int)
+}
+
+public class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     //FOR DATA  ------------------------
     private var arrayOfImage = [String]()
@@ -42,6 +48,8 @@ public class AlertOnboarding: UIView {
     
     public var titleSkipButton = "SKIP"
     public var titleGotItButton = "GOT IT !"
+
+    public var delegate: AlertOnboardingDelegate?
     
     
     public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
@@ -79,6 +87,7 @@ public class AlertOnboarding: UIView {
         self.buttonBottom.setTitle(self.titleSkipButton, forState: .Normal)
         
         self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
+        self.container.delegate = self
         self.insertSubview(self.container.view, aboveSubview: self)
         self.insertSubview(self.buttonBottom, aboveSubview: self)
         
@@ -99,6 +108,14 @@ public class AlertOnboarding: UIView {
     
     //Start the animation
     public func hide(){
+        // Check if onboarding was skipped
+        let currentStep = self.container.currentStep
+        if currentStep < (self.container.arrayOfImage.count - 1) {
+            self.delegate?.alertOnboardingSkipped(currentStep)
+        }
+        else {
+            self.delegate?.alertOnboardingCompleted()
+        }
         dispatch_async(dispatch_get_main_queue()) {
             () -> Void in
             self.animateForEnding()
@@ -201,6 +218,12 @@ public class AlertOnboarding: UIView {
     
     func onClick(){
         self.hide()
+    }
+
+    //MARK: ALERTPAGEVIEWDELEGATE    --------------------------------------
+
+    func nextStep(step: Int) {
+        self.delegate?.alertOnboardingNext(step)
     }
     
     //MARK: OTHERS    --------------------------------------
