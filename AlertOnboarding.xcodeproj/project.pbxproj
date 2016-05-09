@@ -12,13 +12,13 @@
 		4A0098321CA312CD00C5D0E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098301CA312CD00C5D0E6 /* Main.storyboard */; };
 		4A0098341CA312CD00C5D0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098331CA312CD00C5D0E6 /* Assets.xcassets */; };
 		4A0098371CA312CD00C5D0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098351CA312CD00C5D0E6 /* LaunchScreen.storyboard */; };
-		4A0098471CA4052C00C5D0E6 /* AlertChildPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */; };
 		8B03D2081CE0EB2D00144D76 /* AlertOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B03D2071CE0EB2D00144D76 /* AlertOnboarding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B03D2131CE0EC1E00144D76 /* AlertOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */; };
 		8B03D2141CE0EC2300144D76 /* AlertChildPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */; };
 		8B03D2151CE0EC2600144D76 /* AlertPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */; };
 		8B03D24A1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */; };
 		8B03D24B1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B03D2691CE0F9E300144D76 /* AlertChildPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,7 +220,6 @@
 			files = (
 				4A0098371CA312CD00C5D0E6 /* LaunchScreen.storyboard in Resources */,
 				4A0098341CA312CD00C5D0E6 /* Assets.xcassets in Resources */,
-				4A0098471CA4052C00C5D0E6 /* AlertChildPageViewController.xib in Resources */,
 				4A0098321CA312CD00C5D0E6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B03D2691CE0F9E300144D76 /* AlertChildPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +459,7 @@
 				8B03D20F1CE0EB2D00144D76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -108,7 +108,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             }
             //FROM MANUAL INSTALL
         }else {
-            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: NSBundle(forClass: self.dynamicType)).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
         }
         
         pageContentViewController.pageIndex = index // 0
