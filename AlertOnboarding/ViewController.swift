@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AlertOnboarding_iOS
 
 class ViewController: UIViewController, AlertOnboardingDelegate {
-    
+
     var alertView: AlertOnboarding!
     
     var arrayOfImage = ["image1", "image2", "image3"]

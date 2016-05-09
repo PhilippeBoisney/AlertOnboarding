@@ -12,11 +12,38 @@
 		4A0098321CA312CD00C5D0E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098301CA312CD00C5D0E6 /* Main.storyboard */; };
 		4A0098341CA312CD00C5D0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098331CA312CD00C5D0E6 /* Assets.xcassets */; };
 		4A0098371CA312CD00C5D0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098351CA312CD00C5D0E6 /* LaunchScreen.storyboard */; };
-		4A00983F1CA3153400C5D0E6 /* AlertOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */; };
-		4A0098431CA4031B00C5D0E6 /* AlertChildPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */; };
-		4A0098451CA4033400C5D0E6 /* AlertPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */; };
 		4A0098471CA4052C00C5D0E6 /* AlertChildPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */; };
+		8B03D2081CE0EB2D00144D76 /* AlertOnboarding.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B03D2071CE0EB2D00144D76 /* AlertOnboarding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B03D2131CE0EC1E00144D76 /* AlertOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */; };
+		8B03D2141CE0EC2300144D76 /* AlertChildPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */; };
+		8B03D2151CE0EC2600144D76 /* AlertPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */; };
+		8B03D24A1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */; };
+		8B03D24B1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B03D24C1CE0F02600144D76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A0098211CA312CD00C5D0E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B03D2041CE0EB2D00144D76;
+			remoteInfo = "AlertOnboarding iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8B03D24E1CE0F02600144D76 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8B03D24B1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4A0098291CA312CD00C5D0E6 /* AlertOnboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertOnboarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,14 +53,25 @@
 		4A0098331CA312CD00C5D0E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A0098361CA312CD00C5D0E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A0098381CA312CD00C5D0E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertOnboarding.swift; sourceTree = "<group>"; };
-		4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertChildPageViewController.swift; sourceTree = "<group>"; };
-		4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPageViewController.swift; sourceTree = "<group>"; };
-		4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertChildPageViewController.xib; sourceTree = "<group>"; };
+		4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertOnboarding.swift; path = AlertOnboarding/AlertOnboarding.swift; sourceTree = "<group>"; };
+		4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertChildPageViewController.swift; path = AlertOnboarding/AlertChildPageViewController.swift; sourceTree = "<group>"; };
+		4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertPageViewController.swift; path = AlertOnboarding/AlertPageViewController.swift; sourceTree = "<group>"; };
+		4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlertChildPageViewController.xib; path = AlertOnboarding/AlertChildPageViewController.xib; sourceTree = "<group>"; };
+		8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlertOnboarding_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B03D2071CE0EB2D00144D76 /* AlertOnboarding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AlertOnboarding.h; path = AlertOnboarding/AlertOnboarding.h; sourceTree = "<group>"; };
+		8B03D2091CE0EB2D00144D76 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-iOS.plist"; path = "AlertOnboarding/Info-iOS.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4A0098261CA312CD00C5D0E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B03D24A1CE0F02600144D76 /* AlertOnboarding_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B03D2011CE0EB2D00144D76 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +84,7 @@
 		4A0098201CA312CD00C5D0E6 = {
 			isa = PBXGroup;
 			children = (
+				8B03D2121CE0EB6B00144D76 /* Sources */,
 				4A00982B1CA312CD00C5D0E6 /* AlertOnboarding */,
 				4A00982A1CA312CD00C5D0E6 /* Products */,
 			);
@@ -55,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				4A0098291CA312CD00C5D0E6 /* AlertOnboarding.app */,
+				8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,15 +108,35 @@
 				4A0098331CA312CD00C5D0E6 /* Assets.xcassets */,
 				4A0098351CA312CD00C5D0E6 /* LaunchScreen.storyboard */,
 				4A0098381CA312CD00C5D0E6 /* Info.plist */,
-				4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */,
-				4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */,
-				4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */,
-				4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */,
 			);
 			path = AlertOnboarding;
 			sourceTree = "<group>";
 		};
+		8B03D2121CE0EB6B00144D76 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4A00983E1CA3153400C5D0E6 /* AlertOnboarding.swift */,
+				4A0098421CA4031B00C5D0E6 /* AlertChildPageViewController.swift */,
+				4A0098441CA4033400C5D0E6 /* AlertPageViewController.swift */,
+				4A0098461CA4052C00C5D0E6 /* AlertChildPageViewController.xib */,
+				8B03D2071CE0EB2D00144D76 /* AlertOnboarding.h */,
+				8B03D2091CE0EB2D00144D76 /* Info-iOS.plist */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8B03D2021CE0EB2D00144D76 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B03D2081CE0EB2D00144D76 /* AlertOnboarding.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		4A0098281CA312CD00C5D0E6 /* AlertOnboarding */ = {
@@ -86,15 +146,35 @@
 				4A0098251CA312CD00C5D0E6 /* Sources */,
 				4A0098261CA312CD00C5D0E6 /* Frameworks */,
 				4A0098271CA312CD00C5D0E6 /* Resources */,
+				8B03D24E1CE0F02600144D76 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8B03D24D1CE0F02600144D76 /* PBXTargetDependency */,
 			);
 			name = AlertOnboarding;
 			productName = AlertOnboarding;
 			productReference = 4A0098291CA312CD00C5D0E6 /* AlertOnboarding.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8B03D2041CE0EB2D00144D76 /* AlertOnboarding iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B03D2101CE0EB2D00144D76 /* Build configuration list for PBXNativeTarget "AlertOnboarding iOS" */;
+			buildPhases = (
+				8B03D2001CE0EB2D00144D76 /* Sources */,
+				8B03D2011CE0EB2D00144D76 /* Frameworks */,
+				8B03D2021CE0EB2D00144D76 /* Headers */,
+				8B03D2031CE0EB2D00144D76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AlertOnboarding iOS";
+			productName = "AlertOnboarding iOS";
+			productReference = 8B03D2051CE0EB2D00144D76 /* AlertOnboarding_iOS.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -108,6 +188,9 @@
 				TargetAttributes = {
 					4A0098281CA312CD00C5D0E6 = {
 						CreatedOnToolsVersion = 7.2.1;
+					};
+					8B03D2041CE0EB2D00144D76 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -124,6 +207,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				8B03D2041CE0EB2D00144D76 /* AlertOnboarding iOS */,
 				4A0098281CA312CD00C5D0E6 /* AlertOnboarding */,
 			);
 		};
@@ -141,6 +225,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B03D2031CE0EB2D00144D76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -148,15 +239,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A0098451CA4033400C5D0E6 /* AlertPageViewController.swift in Sources */,
 				4A00982F1CA312CD00C5D0E6 /* ViewController.swift in Sources */,
-				4A0098431CA4031B00C5D0E6 /* AlertChildPageViewController.swift in Sources */,
-				4A00983F1CA3153400C5D0E6 /* AlertOnboarding.swift in Sources */,
 				4A00982D1CA312CD00C5D0E6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B03D2001CE0EB2D00144D76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B03D2131CE0EC1E00144D76 /* AlertOnboarding.swift in Sources */,
+				8B03D2141CE0EC2300144D76 /* AlertChildPageViewController.swift in Sources */,
+				8B03D2151CE0EC2600144D76 /* AlertPageViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8B03D24D1CE0F02600144D76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B03D2041CE0EB2D00144D76 /* AlertOnboarding iOS */;
+			targetProxy = 8B03D24C1CE0F02600144D76 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4A0098301CA312CD00C5D0E6 /* Main.storyboard */ = {
@@ -214,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -253,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -265,8 +371,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = AlertOnboarding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cookminute.AlertOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -277,11 +383,51 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = AlertOnboarding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cookminute.AlertOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8B03D20E1CE0EB2D00144D76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "AlertOnboarding/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cookminute.AlertOnboarding-iOS";
+				PRODUCT_NAME = AlertOnboarding_iOS;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8B03D20F1CE0EB2D00144D76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "AlertOnboarding/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cookminute.AlertOnboarding-iOS";
+				PRODUCT_NAME = AlertOnboarding_iOS;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -305,6 +451,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8B03D2101CE0EB2D00144D76 /* Build configuration list for PBXNativeTarget "AlertOnboarding iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B03D20E1CE0EB2D00144D76 /* Debug */,
+				8B03D20F1CE0EB2D00144D76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
