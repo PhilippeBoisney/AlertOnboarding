@@ -84,7 +84,6 @@ class ViewController: UIViewController, AlertOnboardingDelegate
 alertView.delegate = self
 
 //... inside your class that conforms to AlertOnboardingDelegate
-
 func alertOnboardingSkipped(currentStep: Int, maxStep: Int) {
     print("Onboarding skipped the \(currentStep) step and the max step he saw was the number \(maxStep)")
 }
