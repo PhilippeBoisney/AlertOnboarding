@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AlertPageViewDelegate {
+    func nextStep(step: Int)
+}
+
 class AlertPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     //FOR DESIGN
@@ -20,7 +24,10 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var arrayOfTitle: [String]!
     var arrayOfDescription: [String]!
     var viewControllers = [UIViewController]()
-    
+
+    var currentStep = 0
+    var delegate: AlertPageViewDelegate?
+
     
     init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding) {
         super.init(nibName: nil, bundle: nil)
@@ -120,6 +127,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
         let index = pageContentViewController.pageIndex
+        self.currentStep = (arrayOfImage.count - index - 1)
+        self.delegate?.nextStep(self.currentStep)
         if pageControl != nil {
             pageControl.currentPage = arrayOfImage.count - index - 1
             if pageControl.currentPage == arrayOfImage.count - 1 {
@@ -129,7 +138,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             }
         }
     }
-    
+
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return arrayOfImage.count
@@ -160,7 +169,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             let pageControl = UIPageControl.appearanceWhenContainedInInstancesOfClasses([AlertPageViewController.self])
             pageControl.pageIndicatorTintColor = UIColor.clearColor()
             pageControl.currentPageIndicatorTintColor = UIColor.clearColor()
-            
+
         } else {
             // Fallback on earlier versions
         }
