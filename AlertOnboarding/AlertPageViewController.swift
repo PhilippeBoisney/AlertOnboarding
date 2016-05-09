@@ -24,10 +24,13 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var arrayOfTitle: [String]!
     var arrayOfDescription: [String]!
     var viewControllers = [UIViewController]()
-
+    
+    //FOR TRACKING USER USAGE
     var currentStep = 0
+    var maxStep = 0
+    var isCompleted = false
     var delegate: AlertPageViewDelegate?
-
+    
     
     init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding) {
         super.init(nibName: nil, bundle: nil)
@@ -100,11 +103,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         if let bundleURL = podBundle.URLForResource("AlertOnboardingXib", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
                 pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
-                
             } else {
-                
-                assertionFailure("Could not load the bundle")
-                
+                assertionFailure("Could not load the bundle.. Please re-install AlertOnboarding via Cocoapod or install it manually.")
             }
             //FROM MANUAL INSTALL
         }else {
@@ -129,6 +129,14 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let index = pageContentViewController.pageIndex
         self.currentStep = (arrayOfImage.count - index - 1)
         self.delegate?.nextStep(self.currentStep)
+        //Check if user watching the last step
+        if currentStep == arrayOfImage.count - 1 {
+            self.isCompleted = true
+        }
+        //Remember the last screen user have seen
+        if currentStep > self.maxStep {
+            self.maxStep = currentStep
+        }
         if pageControl != nil {
             pageControl.currentPage = arrayOfImage.count - index - 1
             if pageControl.currentPage == arrayOfImage.count - 1 {
@@ -138,7 +146,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             }
         }
     }
-
+    
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return arrayOfImage.count
@@ -169,7 +177,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             let pageControl = UIPageControl.appearanceWhenContainedInInstancesOfClasses([AlertPageViewController.self])
             pageControl.pageIndicatorTintColor = UIColor.clearColor()
             pageControl.currentPageIndicatorTintColor = UIColor.clearColor()
-
+            
         } else {
             // Fallback on earlier versions
         }
@@ -184,6 +192,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.addChildViewController(self.pageController)
     }
     
+    //MARK: Called after notification orientation changement
     func configureConstraintsForPageControl() {
         let alertViewSizeHeight = UIScreen.mainScreen().bounds.height*alertview.percentageRatioHeight
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
