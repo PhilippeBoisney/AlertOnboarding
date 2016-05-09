@@ -10,7 +10,7 @@
 import UIKit
 
 public protocol AlertOnboardingDelegate {
-    func alertOnboardingSkipped(lastStep: Int)
+    func alertOnboardingSkipped(currentStep: Int, maxStep: Int)
     func alertOnboardingCompleted()
     func alertOnboardingNext(nextStep: Int)
 }
@@ -48,7 +48,7 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     public var titleSkipButton = "SKIP"
     public var titleGotItButton = "GOT IT !"
-
+    
     public var delegate: AlertOnboardingDelegate?
     
     
@@ -106,18 +106,10 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
         }
     }
     
-    //Start the animation
+    //Hide onboarding with animation
     public func hide(){
-        // Check if onboarding was skipped
-        let currentStep = self.container.currentStep
-        if currentStep < (self.container.arrayOfImage.count - 1) {
-            self.delegate?.alertOnboardingSkipped(currentStep)
-        }
-        else {
-            self.delegate?.alertOnboardingCompleted()
-        }
-        dispatch_async(dispatch_get_main_queue()) {
-            () -> Void in
+        self.checkIfOnboardingWasSkipped()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.animateForEnding()
         }
     }
@@ -126,6 +118,17 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
     //------------------------------------------------------------------------------------------
     // MARK: PRIVATE FUNCTIONS    --------------------------------------------------------------
     //------------------------------------------------------------------------------------------
+    
+    //MARK: Check if onboarding was skipped
+    private func checkIfOnboardingWasSkipped(){
+        let currentStep = self.container.currentStep
+        if currentStep < (self.container.arrayOfImage.count - 1) && !self.container.isCompleted{
+            self.delegate?.alertOnboardingSkipped(currentStep, maxStep: self.container.maxStep)
+        }
+        else {
+            self.delegate?.alertOnboardingCompleted()
+        }
+    }
     
     
     //MARK: FOR CONFIGURATION    --------------------------------------
@@ -209,7 +212,6 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
                     self.removeFromSuperview()
                     self.container.removeFromParentViewController()
                     self.container.view.removeFromSuperview()
-                    
                 }
         })
     }
@@ -219,9 +221,9 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
     func onClick(){
         self.hide()
     }
-
+    
     //MARK: ALERTPAGEVIEWDELEGATE    --------------------------------------
-
+    
     func nextStep(step: Int) {
         self.delegate?.alertOnboardingNext(step)
     }
@@ -235,6 +237,7 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
         return topController
     }
     
+    //MARK: NOTIFICATIONS PROCESS ------------------------------------------
     private func interceptOrientationChange(){
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlertOnboarding.onOrientationChange), name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -246,5 +249,4 @@ public class AlertOnboarding: UIView, AlertPageViewDelegate {
             self.container.configureConstraintsForPageControl()
         }
     }
-    
 }
