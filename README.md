@@ -43,7 +43,7 @@ alertView.show()
 alertView.hide()
 
 ```
-**OPTIONS**
+**CUSTOMIZING**
 
 You have to set options **BEFORE** call show() function.
 
@@ -72,7 +72,7 @@ self.alertView.titleSkipButton = "PASS"
 self.alertView.titleGotItButton = "UNDERSTOOD !"
 
 ```
-**Tracking Events**
+**TRACKING EVENTS**
 
 If you want to know when the user completes onboarding, skips onboarding, or triggers the next step, you can use the `AlertOnboardingDelegate` to listen for these updates.
 
