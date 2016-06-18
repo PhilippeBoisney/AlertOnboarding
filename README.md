@@ -63,9 +63,9 @@ self.alertView.colorDescriptionLabel = UIColor.whiteColor()
 self.alertView.colorPageIndicator = UIColor.whiteColor()
 self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0) 
 
-//Modify size of alertview (Purcentage of screen height and width)
-self.alertView.purcentageRatioHeight = 0.5
-self.alertView.purcentageRatioWidth = 0.5
+//Modify size of alertview (Percentage of screen height and width)
+self.alertView.percentageRatioHeight = 0.5
+self.alertView.percentageRatioWidth = 0.5
 
 //Modify labels
 self.alertView.titleSkipButton = "PASS"
