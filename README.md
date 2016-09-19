@@ -61,7 +61,7 @@ self.alertView.colorDescriptionLabel = UIColor.whiteColor()
 
 //Modify colors of page indicator
 self.alertView.colorPageIndicator = UIColor.whiteColor()
-self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0) 
+self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)
 
 //Modify size of alertview (Purcentage of screen height and width)
 self.alertView.percentageRatioHeight = 0.5
@@ -101,15 +101,15 @@ func alertOnboardingNext(nextStep: Int) {
 ## FEATURES
 - [x] Multi-Device Full Support
 - [x] Rotation Support
+- [x] Swift 3 Support
 - [x] Fully customisable
 - [x] Tracking Events
 
 ## Version
-1.7
+1.8
 
 ## Author
 Philippe BOISNEY (phil.boisney(@)gmail.com)
 
 ## Design
 [Sasha Gorosh](https://dribbble.com/SashaGorosh)
-
