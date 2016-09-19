@@ -24,7 +24,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
         alertView.delegate = self
     }
     
-    @IBAction func onTouch(sender: AnyObject) {
+    @IBAction func onTouch(_ sender: AnyObject) {
         
         /*
          
@@ -53,7 +53,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     // MARK: DELEGATE METHODS --------------------------------
     //--------------------------------------------------------
     
-    func alertOnboardingSkipped(currentStep: Int, maxStep: Int) {
+    func alertOnboardingSkipped(_ currentStep: Int, maxStep: Int) {
         print("Onboarding skipped the \(currentStep) step and the max step he saw was the number \(maxStep)")
     }
     
@@ -61,7 +61,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
         print("Onboarding completed!")
     }
     
-    func alertOnboardingNext(nextStep: Int) {
+    func alertOnboardingNext(_ nextStep: Int) {
         print("Next step triggered! \(nextStep)")
     }
     

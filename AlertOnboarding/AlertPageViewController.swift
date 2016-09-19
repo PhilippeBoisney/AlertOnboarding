@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AlertPageViewDelegate {
-    func nextStep(step: Int)
+    func nextStep(_ step: Int)
 }
 
 class AlertPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -50,13 +50,13 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.configurePageViewController()
         self.configurePageControl()
         
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
         self.view.addSubview(self.pageController.view)
         self.view.addSubview(self.pageControl)
-        self.pageController.didMoveToParentViewController(self)
+        self.pageController.didMove(toParentViewController: self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
@@ -68,7 +68,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! AlertChildPageViewController).pageIndex!
         
@@ -80,7 +80,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         return self.viewControllerAtIndex(index)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! AlertChildPageViewController).pageIndex!
         
@@ -94,21 +94,21 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     
-    func viewControllerAtIndex(index : Int) -> UIViewController? {
+    func viewControllerAtIndex(_ index : Int) -> UIViewController? {
         
         var pageContentViewController: AlertChildPageViewController!
-        let podBundle = NSBundle(forClass: self.classForCoder)
+        let podBundle = Bundle(for: self.classForCoder)
         
         //FROM COCOAPOD
-        if let bundleURL = podBundle.URLForResource("AlertOnboardingXib", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
-                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+        if let bundleURL = podBundle.url(forResource: "AlertOnboardingXib", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
+                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
             } else {
                 assertionFailure("Could not load the bundle.. Please re-install AlertOnboarding via Cocoapod or install it manually.")
             }
             //FROM MANUAL INSTALL
         }else {
-            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AlertChildPageViewController
+            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
         }
         
         pageContentViewController.pageIndex = index // 0
@@ -124,10 +124,10 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         return pageContentViewController
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
         let index = pageContentViewController.pageIndex
-        self.currentStep = (arrayOfImage.count - index - 1)
+        self.currentStep = (arrayOfImage.count - index! - 1)
         self.delegate?.nextStep(self.currentStep)
         //Check if user watching the last step
         if currentStep == arrayOfImage.count - 1 {
@@ -138,45 +138,45 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             self.maxStep = currentStep
         }
         if pageControl != nil {
-            pageControl.currentPage = arrayOfImage.count - index - 1
+            pageControl.currentPage = arrayOfImage.count - index! - 1
             if pageControl.currentPage == arrayOfImage.count - 1 {
-                self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, forState: .Normal)
+                self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControlState())
             } else {
-                self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, forState: .Normal)
+                self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControlState())
             }
         }
     }
     
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return arrayOfImage.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     
     //MARK: CONFIGURATION ---------------------------------------------------------------------------------
-    private func configurePageControl() {
-        self.pageControl = UIPageControl(frame: CGRectMake(0,0,0,0))
-        self.pageControl.backgroundColor = UIColor.clearColor()
+    fileprivate func configurePageControl() {
+        self.pageControl = UIPageControl(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
+        self.pageControl.backgroundColor = UIColor.clear
         self.pageControl.pageIndicatorTintColor = alertview.colorPageIndicator
         self.pageControl.currentPageIndicatorTintColor = alertview.colorCurrentPageIndicator
         self.pageControl.numberOfPages = arrayOfImage.count
         self.pageControl.currentPage = 0
-        self.pageControl.enabled = false
+        self.pageControl.isEnabled = false
         
         self.configureConstraintsForPageControl()
     }
     
-    private func configurePageViewController(){
-        self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
-        self.pageController.view.backgroundColor = UIColor.clearColor()
+    fileprivate func configurePageViewController(){
+        self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal, options: nil)
+        self.pageController.view.backgroundColor = UIColor.clear
         
         if #available(iOS 9.0, *) {
-            let pageControl = UIPageControl.appearanceWhenContainedInInstancesOfClasses([AlertPageViewController.self])
-            pageControl.pageIndicatorTintColor = UIColor.clearColor()
-            pageControl.currentPageIndicatorTintColor = UIColor.clearColor()
+            let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [AlertPageViewController.self])
+            pageControl.pageIndicatorTintColor = UIColor.clear
+            pageControl.currentPageIndicatorTintColor = UIColor.clear
             
         } else {
             // Fallback on earlier versions
@@ -187,15 +187,15 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
         self.viewControllers = [initialViewController!]
-        self.pageController.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+        self.pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
         self.addChildViewController(self.pageController)
     }
     
     //MARK: Called after notification orientation changement
     func configureConstraintsForPageControl() {
-        let alertViewSizeHeight = UIScreen.mainScreen().bounds.height*alertview.percentageRatioHeight
+        let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.percentageRatioHeight
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
-        self.pageControl.frame = CGRectMake(0, positionX, self.view.bounds.width, 50)
+        self.pageControl.frame = CGRect(x: 0, y: positionX, width: self.view.bounds.width, height: 50)
     }
 }
