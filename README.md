@@ -106,7 +106,7 @@ func alertOnboardingNext(nextStep: Int) {
 - [x] Tracking Events
 
 ## Version
-1.8
+1.9
 
 ## Author
 Philippe BOISNEY (phil.boisney(@)gmail.com)
