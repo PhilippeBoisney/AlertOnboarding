@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A0098281CA312CD00C5D0E6"
+               BlueprintIdentifier = "37845A641D994CBA009B3734"
                BuildableName = "AlertOnboarding.app"
                BlueprintName = "AlertOnboarding"
                ReferencedContainer = "container:AlertOnboarding.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A0098281CA312CD00C5D0E6"
+            BlueprintIdentifier = "37845A641D994CBA009B3734"
             BuildableName = "AlertOnboarding.app"
             BlueprintName = "AlertOnboarding"
             ReferencedContainer = "container:AlertOnboarding.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A0098281CA312CD00C5D0E6"
+            BlueprintIdentifier = "37845A641D994CBA009B3734"
             BuildableName = "AlertOnboarding.app"
             BlueprintName = "AlertOnboarding"
             ReferencedContainer = "container:AlertOnboarding.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4A0098281CA312CD00C5D0E6"
+            BlueprintIdentifier = "37845A641D994CBA009B3734"
             BuildableName = "AlertOnboarding.app"
             BlueprintName = "AlertOnboarding"
             ReferencedContainer = "container:AlertOnboarding.xcodeproj">

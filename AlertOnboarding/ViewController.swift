@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  AlertOnboarding
 //
-//  Created by Philippe Boisney on 23/03/2016.
-//  Copyright © 2016 Philippe Boisney. All rights reserved.
+//  Created by Philippe on 26/09/2016.
+//  Copyright © 2016 CookMinute. All rights reserved.
 //
 
 import UIKit
