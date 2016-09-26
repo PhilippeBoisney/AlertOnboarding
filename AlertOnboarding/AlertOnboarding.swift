@@ -2,10 +2,9 @@
 //  AlertOnboarding.swift
 //  AlertOnboarding
 //
-//  Created by Philippe Boisney on 23/03/2016.
-//  Copyright © 2016 Philippe Boisney. All rights reserved.
+//  Created by Philippe on 26/09/2016.
+//  Copyright © 2016 CookMinute. All rights reserved.
 //
-
 
 import UIKit
 
@@ -186,9 +185,9 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         let heightConstraintForBackground = NSLayoutConstraint.init(item: self.background, attribute: .height, relatedBy: .equal, toItem: superView, attribute: .height, multiplier: 1, constant: 0)
         
         NSLayoutConstraint.activate([horizontalContraintsAlertView, verticalContraintsAlertView,heightConstraintForAlertView, widthConstraintForAlertView,
-            verticalContraintsButtonBottom, heightConstraintForButtonBottom, widthConstraintForButtonBottom, pinContraintsButtonBottom,
-            verticalContraintsForContainer, heightConstraintForContainer, widthConstraintForContainer, pinContraintsForContainer,
-            widthContraintsForBackground, heightConstraintForBackground])
+                                     verticalContraintsButtonBottom, heightConstraintForButtonBottom, widthConstraintForButtonBottom, pinContraintsButtonBottom,
+                                     verticalContraintsForContainer, heightConstraintForContainer, widthConstraintForContainer, pinContraintsForContainer,
+                                     widthContraintsForBackground, heightConstraintForBackground])
     }
     
     //MARK: FOR ANIMATIONS ---------------------------------
