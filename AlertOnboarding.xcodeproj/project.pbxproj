@@ -116,6 +116,7 @@
 				TargetAttributes = {
 					37845A641D994CBA009B3734 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = J65C27H74Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -284,9 +285,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J65C27H74Y;
 				INFOPLIST_FILE = AlertOnboarding/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cookminute.AlertOnboarding;
+				PRODUCT_BUNDLE_IDENTIFIER = be.webdevotion.AlertOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -296,9 +298,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J65C27H74Y;
 				INFOPLIST_FILE = AlertOnboarding/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cookminute.AlertOnboarding;
+				PRODUCT_BUNDLE_IDENTIFIER = be.webdevotion.AlertOnboarding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -323,6 +326,7 @@
 				37845A791D994CBA009B3734 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
