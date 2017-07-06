@@ -47,7 +47,6 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-05-M15" customClass="TopAlignedLabel" customModule="AlertOnboarding" customModuleProvider="target">
                                 <rect key="frame" x="30" y="90.666666666666686" width="540" height="71.333333333333314"/>
-                                <color key="backgroundColor" red="1" green="0.84554892946601057" blue="0.95330539936328629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" priority="500" constant="300" id="OGS-9u-JAe"/>
                                 </constraints>
@@ -114,7 +113,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.94702480570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.59999999999999998"/>
                         <constraints>
                             <constraint firstItem="BOp-iF-ff6" firstAttribute="leading" secondItem="idc-BF-yRA" secondAttribute="leading" id="abt-q3-Joe"/>
@@ -137,7 +135,7 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ejv-jb-Rn0" userLabel="Container">
                         <rect key="frame" x="0.0" y="594" width="600" height="142"/>
-                        <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" identifier="containerHeightConstraint" id="dYR-sr-eDX">
                                 <variation key="widthClass=compact" constant="10"/>
