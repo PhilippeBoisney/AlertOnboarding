@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "AlertOnboarding"
-s.version          = "1.11"
+s.version          = "1.12"
 s.summary          = "AlertOnboarding"
 s.description      = "A simple and handsome AlertView to onboard your users in your amazing world."
 s.homepage         = "https://github.com/webdevotion/AlertOnboarding"

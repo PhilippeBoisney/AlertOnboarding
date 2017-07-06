@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class TopAlignedLabel: UILabel {
+@IBDesignable class AlertOnboardingTopAlignedLabel: UILabel {
     override func drawText(in rect: CGRect) {
         if let stringText = text {
             let stringTextAsNSString = stringText as NSString
@@ -31,7 +31,7 @@ import UIKit
 class AlertChildPageViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var labelMainTitle: UILabel!
-    @IBOutlet weak var labelDescription: TopAlignedLabel!
+    @IBOutlet weak var labelDescription: AlertOnboardingTopAlignedLabel!
     @IBOutlet weak var contentContainer: UIView!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
     
