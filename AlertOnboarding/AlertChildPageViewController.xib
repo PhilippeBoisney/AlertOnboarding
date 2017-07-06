@@ -183,8 +183,8 @@
                         <exclude reference="g4u-BP-ce4"/>
                         <exclude reference="okV-ap-azA"/>
                         <exclude reference="oth-Yy-Gaq"/>
-                        <exclude reference="nIg-D3-8VI"/>
                         <exclude reference="1yD-Gt-A9a"/>
+                        <exclude reference="nIg-D3-8VI"/>
                     </mask>
                 </variation>
                 <variation key="widthClass=compact">
@@ -202,8 +202,8 @@
                         <include reference="g4u-BP-ce4"/>
                         <include reference="okV-ap-azA"/>
                         <include reference="oth-Yy-Gaq"/>
-                        <include reference="nIg-D3-8VI"/>
                         <exclude reference="1yD-Gt-A9a"/>
+                        <include reference="nIg-D3-8VI"/>
                     </mask>
                 </variation>
             </view>
