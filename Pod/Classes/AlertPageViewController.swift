@@ -23,6 +23,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var arrayOfImage: [String]!
     var arrayOfTitle: [String]!
     var arrayOfDescription: [String]!
+    var arrayOfContainers: [CGFloat]!
     var viewControllers = [UIViewController]()
     
     //FOR TRACKING USER USAGE
@@ -38,6 +39,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
         self.alertview = alertView
+        self.arrayOfContainers = self.arrayOfImage.map { (String) -> CGFloat in
+            return 40.0 + CGFloat(arc4random_uniform(100))
+        }
     }
     
     required init(coder: NSCoder) {
@@ -120,7 +124,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
-        
+        pageContentViewController.containerHeight = arrayOfContainers[realIndex]
         return pageContentViewController
     }
     
