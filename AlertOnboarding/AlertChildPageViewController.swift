@@ -83,7 +83,7 @@ class AlertChildPageViewController: UIViewController {
                                                                 toItem: self.view,
                                                                 attribute: .centerXWithinMargins,
                                                                 multiplier: 1.0,
-                                                                constant: 10)
+                                                                constant: 0)
         
         let heightConstraintForContainer = NSLayoutConstraint.init(item: self.contentContainer,
                                                                    attribute: .height,
@@ -116,6 +116,7 @@ class AlertChildPageViewController: UIViewController {
                                                                  attribute: .left,
                                                                  multiplier: 1,
                                                                  constant: 10)
+        leftContraintsForContainer.identifier = "left constraint for container"
         
         NSLayoutConstraint.activate([horizontalContraintsForContainer,
                                      heightConstraintForContainer,

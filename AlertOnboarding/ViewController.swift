@@ -12,16 +12,21 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     
     var alertView: AlertOnboarding!
     
-    var arrayOfImage = ["onboarding", "train", "train"]
-    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET\nACROSS TWO LINES", "DEPARTURE"]
-    var arrayOfDescription = ["In your profile, you can view the statistics of its operations and the recommandations of friends",
-                              "Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies. Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies.",
-                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life"]
+    var arrayOfImage = ["onboarding", "graph", "train"]
+    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET ACROSS TWO LINES OR EVEN MORE.  IF POSSIBLE.", "DEPARTURE"]
+    var arrayOfDescription = ["In your profile, you can view the statistics of its operations and the recommandations of friends!",
+                              "Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies. Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies!",
+                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life!"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
-        alertView.delegate = self
+        alertView.delegate = self   
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.onTouch(self)
     }
     
     @IBAction func onTouch(_ sender: AnyObject) {

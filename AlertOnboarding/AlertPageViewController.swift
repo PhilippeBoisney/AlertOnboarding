@@ -72,11 +72,12 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func nextPage() -> Bool {
+        print( self.currentStep )
         guard let nextvc = self.viewControllerAtIndex(self.currentStep + 1) else {
             return false
         }
 
-        self.pageControl.currentPage = self.currentStep + 1
+        //self.pageControl.currentPage = self.currentStep + 1
         self.pageController.setViewControllers([nextvc], direction: .forward, animated: true) { (result) in
             self.refresh()
         }
