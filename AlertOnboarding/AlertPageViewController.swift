@@ -78,7 +78,7 @@ extension AlertPageViewController {
         
         if( self.currentStep.value != pageViewControllerTransition.nextIndex ){
             self.currentStep.value = pageViewControllerTransition.nextIndex
-            refresh()
+            refresh(animated:false)
         }
     }
 }
@@ -210,7 +210,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
 
     
-    func refresh() {
+    func refresh(animated:Bool = true,direction:UIPageViewControllerNavigationDirection = .forward) {
         print(self.currentStep.value)
         DispatchQueue.main.async {
             
@@ -219,7 +219,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             }
             
             self.viewControllers = [currentPageViewController]
-            self.pageController.setViewControllers(self.viewControllers, direction: .forward, animated: false, completion: nil)
+            self.pageController.setViewControllers(self.viewControllers, direction: direction, animated: animated, completion: nil)
             self.currentStep.value = (currentPageViewController as AlertChildPageViewController).pageIndex
 
             //Remember the last screen user have seen
