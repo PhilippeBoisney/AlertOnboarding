@@ -77,7 +77,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
     
-    open func show() {
+    open func show(animated:Bool = false) {
         
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
@@ -101,15 +101,15 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             superView.addSubview(self.background)
             superView.addSubview(self)
             self.configureConstraints(topController.view)
-            self.animateForOpening()
+            self.animateForOpening(animated)
         }
     }
     
     //Hide onboarding with animation
-    open func hide(){
+    open func hide(animated:Bool = false){
         self.checkIfOnboardingWasSkipped()
         DispatchQueue.main.async { () -> Void in
-            self.animateForEnding()
+            self.animateForEnding(animated)
         }
     }
     
@@ -192,7 +192,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //MARK: FOR ANIMATIONS ---------------------------------
-    fileprivate func animateForOpening(animate:Bool = false){
+    fileprivate func animateForOpening(_ animate:Bool = false){
         if(!animate){
             return
         }
@@ -204,7 +204,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             }, completion: nil)
     }
     
-    fileprivate func animateForEnding(animate:Bool = false){
+    fileprivate func animateForEnding(_ animate:Bool = false){
         
         func destroy(_ completion: Bool = true) {
             DispatchQueue.main.async {

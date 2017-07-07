@@ -30,20 +30,20 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     }
     
     @IBAction func onTouch(_ sender: AnyObject) {
-      // IF YOU WANT TO CUSTOMISE ALERTVIEW
-      self.alertView.colorForAlertViewBackground = UIColor(hue:0.55, saturation:0.62, brightness:0.97, alpha:1.00)
-      self.alertView.colorButtonText = .white
-      self.alertView.colorButtonBottomBackground = UIColor(hue:0.59, saturation:0.89, brightness:0.98, alpha:1.00)
+        // IF YOU WANT TO CUSTOMISE ALERTVIEW
+        self.alertView.colorForAlertViewBackground = UIColor(hue:0.55, saturation:0.62, brightness:0.97, alpha:1.00)
+        self.alertView.colorButtonText = .white
+        self.alertView.colorButtonBottomBackground = UIColor(hue:0.59, saturation:0.89, brightness:0.98, alpha:1.00)
 
-      self.alertView.colorTitleLabel = .white
-      self.alertView.colorDescriptionLabel = .white
+        self.alertView.colorTitleLabel = .white
+        self.alertView.colorDescriptionLabel = .white
 
-      self.alertView.colorPageIndicator = .white
-      self.alertView.colorCurrentPageIndicator = .lightGray
+        self.alertView.colorPageIndicator = .white
+        self.alertView.colorCurrentPageIndicator = .lightGray
 
-      self.alertView.percentageRatioHeight = 1.0
-      self.alertView.percentageRatioWidth = 1.0
-      self.alertView.show()
+        self.alertView.percentageRatioHeight = 1.0
+        self.alertView.percentageRatioWidth = 1.0
+        self.alertView.show(animated:false)
     }
     
     //--------------------------------------------------------
