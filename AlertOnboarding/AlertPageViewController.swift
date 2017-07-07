@@ -71,6 +71,20 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         super.didReceiveMemoryWarning()
     }
     
+    func nextPage() -> Bool {
+        guard let nextvc = self.viewControllerAtIndex(self.currentStep + 1) else {
+            return false
+        }
+
+        self.pageControl.currentPage = self.currentStep + 1
+        self.pageController.setViewControllers([nextvc], direction: .forward, animated: true) { (result) in
+            self.refresh()
+        }
+        
+        
+        return true
+    }
+    
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
@@ -99,6 +113,10 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     func viewControllerAtIndex(_ index : Int) -> UIViewController? {
+        
+        if index < 0 || index >= arrayOfImage.count {
+            return nil
+        }
         
         var pageContentViewController: AlertChildPageViewController!
         let podBundle = Bundle(for: self.classForCoder)
@@ -129,7 +147,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
+        refresh()
+    }
+    
+    func refresh() {
+        let pageContentViewController = self.pageController.viewControllers![0] as! AlertChildPageViewController
         let index = pageContentViewController.pageIndex
         self.currentStep = (arrayOfImage.count - index! - 1)
         self.delegate?.nextStep(self.currentStep)

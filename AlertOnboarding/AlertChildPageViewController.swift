@@ -73,20 +73,17 @@ class AlertChildPageViewController: UIViewController {
     }
     
     private func configureConstraints() {
-        let h = max( 10.0, self.containerHeight )
-        print( h, self.containerHeight )
-        //self.view.translatesAutoresizingMaskIntoConstraints = false
         self.contentContainer.translatesAutoresizingMaskIntoConstraints = false
         self.contentContainer.removeConstraints(self.contentContainer.constraints)
         
         //Constraints for container
-        let verticalContraintsForContainer = NSLayoutConstraint(item: self.contentContainer,
+        let horizontalContraintsForContainer = NSLayoutConstraint(item: self.contentContainer,
                                                                 attribute:.centerXWithinMargins,
                                                                 relatedBy: .equal,
                                                                 toItem: self.view,
                                                                 attribute: .centerXWithinMargins,
                                                                 multiplier: 1.0,
-                                                                constant: 0)
+                                                                constant: 10)
         
         let heightConstraintForContainer = NSLayoutConstraint.init(item: self.contentContainer,
                                                                    attribute: .height,
@@ -94,17 +91,17 @@ class AlertChildPageViewController: UIViewController {
                                                                    toItem: nil,
                                                                    attribute: .notAnAttribute,
                                                                    multiplier: 1,
-                                                                   constant: h)
+                                                                   constant: self.containerHeight)
         
-//        let widthConstraintForContainer = NSLayoutConstraint.init(item: self.contentContainer,
-//                                                                  attribute: .width,
-//                                                                  relatedBy: .equal,
-//                                                                  toItem: nil,
-//                                                                  attribute: .notAnAttribute,
-//                                                                  multiplier: 1,
-//                                                                  constant: 200.0)
-        
-        let pinContraintsForContainer = NSLayoutConstraint(item: self.contentContainer,
+        let widthConstraintForContainer = NSLayoutConstraint.init(item: self.contentContainer,
+                                                                   attribute: .width,
+                                                                   relatedBy: .equal,
+                                                                   toItem: self.view,
+                                                                   attribute: .width,
+                                                                   multiplier: 1,
+                                                                   constant: -20)
+
+        let bottomContraintsForContainer = NSLayoutConstraint(item: self.contentContainer,
                                                            attribute: .bottom,
                                                            relatedBy: .equal,
                                                            toItem: self.view,
@@ -112,6 +109,18 @@ class AlertChildPageViewController: UIViewController {
                                                            multiplier: 1.0,
                                                            constant: 0)
         
-        NSLayoutConstraint.activate([verticalContraintsForContainer, heightConstraintForContainer, pinContraintsForContainer])
+        let leftContraintsForContainer = NSLayoutConstraint.init(item: self.contentContainer,
+                                                                 attribute: .left,
+                                                                 relatedBy: .equal,
+                                                                 toItem: self.view,
+                                                                 attribute: .left,
+                                                                 multiplier: 1,
+                                                                 constant: 10)
+        
+        NSLayoutConstraint.activate([horizontalContraintsForContainer,
+                                     heightConstraintForContainer,
+                                     widthConstraintForContainer,
+                                     leftContraintsForContainer,
+                                     bottomContraintsForContainer])
     }
 }
