@@ -206,12 +206,17 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         pageContentViewController.labelDescription.text = arrayOfDescription[index]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
         
+        let vc = arrayOfContainers[index]
+        pageContentViewController.addChildViewController(vc)
+        pageContentViewController.view.addSubview(vc.view)
+        pageContentViewController.contentContainer = vc.view
+        vc.didMove(toParentViewController: pageContentViewController)
+        pageContentViewController.configureConstraints()
         return pageContentViewController
     }
 
     
     func refresh(animated:Bool = true,direction:UIPageViewControllerNavigationDirection = .forward) {
-        print(self.currentStep.value)
         DispatchQueue.main.async {
             
             guard let currentPageViewController = self.viewControllerAtIndex(self.currentStep.value) else {

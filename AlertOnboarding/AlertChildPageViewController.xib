@@ -164,6 +164,7 @@
                 <outlet property="containerHeightConstraint" destination="dYR-sr-eDX" id="g74-8i-YpY"/>
                 <outlet property="contentContainer" destination="Ejv-jb-Rn0" id="Iar-FX-MhQ"/>
                 <outlet property="image" destination="BOp-iF-ff6" id="aXe-f0-gkW"/>
+                <outlet property="imageContainerView" destination="idc-BF-yRA" id="ypP-WT-daq"/>
                 <outlet property="labelDescription" destination="eh1-05-M15" id="L7D-xS-LS8"/>
                 <outlet property="labelMainTitle" destination="64e-Bi-ts0" id="e4v-NZ-Ysx"/>
             </connections>

@@ -20,7 +20,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: [self.contentExample(), self.contentExample(), self.contentExample()])
+        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: [self.contentExample(), self.contentExample(), self.contentExample(),self.contentExample()])
         alertView.delegate = self   
     }
     
@@ -65,7 +65,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     }
     
     func alertOnboardingNext(_ nextStep: Int) {
-        print("Next step triggered! \(nextStep)")
+        
     }
     
 }

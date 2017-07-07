@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BB66D2367A781389E435913 /* Pods_AlertOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4EE95DBC5D4A65E2757A1F /* Pods_AlertOnboarding.framework */; };
 		37845A691D994CBA009B3734 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37845A681D994CBA009B3734 /* AppDelegate.swift */; };
 		37845A6B1D994CBA009B3734 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37845A6A1D994CBA009B3734 /* ViewController.swift */; };
 		37845A6E1D994CBA009B3734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37845A6C1D994CBA009B3734 /* Main.storyboard */; };
@@ -16,9 +17,11 @@
 		37845A7E1D994D87009B3734 /* AlertChildPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37845A7D1D994D87009B3734 /* AlertChildPageViewController.swift */; };
 		37845A801D994DA6009B3734 /* AlertPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37845A7F1D994DA6009B3734 /* AlertPageViewController.swift */; };
 		37845A821D994DE6009B3734 /* AlertChildPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37845A811D994DE6009B3734 /* AlertChildPageViewController.xib */; };
+		9FD0C3C41F0FA3CF005717F1 /* ExampleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD0C3C31F0FA3CF005717F1 /* ExampleContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26D262FDD4E3A7FC19319A1A /* Pods-AlertOnboarding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlertOnboarding.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlertOnboarding/Pods-AlertOnboarding.release.xcconfig"; sourceTree = "<group>"; };
 		37845A651D994CBA009B3734 /* AlertOnboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlertOnboarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37845A681D994CBA009B3734 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37845A6A1D994CBA009B3734 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +33,9 @@
 		37845A7D1D994D87009B3734 /* AlertChildPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertChildPageViewController.swift; sourceTree = "<group>"; };
 		37845A7F1D994DA6009B3734 /* AlertPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPageViewController.swift; sourceTree = "<group>"; };
 		37845A811D994DE6009B3734 /* AlertChildPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertChildPageViewController.xib; sourceTree = "<group>"; };
+		3FF27CA2DCBC1A2EF739D669 /* Pods-AlertOnboarding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlertOnboarding.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlertOnboarding/Pods-AlertOnboarding.debug.xcconfig"; sourceTree = "<group>"; };
+		9FD0C3C31F0FA3CF005717F1 /* ExampleContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleContentViewController.swift; sourceTree = "<group>"; };
+		DE4EE95DBC5D4A65E2757A1F /* Pods_AlertOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlertOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB66D2367A781389E435913 /* Pods_AlertOnboarding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +55,8 @@
 			children = (
 				37845A671D994CBA009B3734 /* AlertOnboarding */,
 				37845A661D994CBA009B3734 /* Products */,
+				4C24BFB1B02E8087E81186A2 /* Pods */,
+				EC28B83EA66DBA868A14A1FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +74,7 @@
 				37845A7A1D994D51009B3734 /* Alert */,
 				37845A681D994CBA009B3734 /* AppDelegate.swift */,
 				37845A6A1D994CBA009B3734 /* ViewController.swift */,
+				9FD0C3C31F0FA3CF005717F1 /* ExampleContentViewController.swift */,
 				37845A6C1D994CBA009B3734 /* Main.storyboard */,
 				37845A6F1D994CBA009B3734 /* Assets.xcassets */,
 				37845A711D994CBA009B3734 /* LaunchScreen.storyboard */,
@@ -84,6 +94,23 @@
 			name = Alert;
 			sourceTree = "<group>";
 		};
+		4C24BFB1B02E8087E81186A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3FF27CA2DCBC1A2EF739D669 /* Pods-AlertOnboarding.debug.xcconfig */,
+				26D262FDD4E3A7FC19319A1A /* Pods-AlertOnboarding.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EC28B83EA66DBA868A14A1FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE4EE95DBC5D4A65E2757A1F /* Pods_AlertOnboarding.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,9 +118,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37845A771D994CBA009B3734 /* Build configuration list for PBXNativeTarget "AlertOnboarding" */;
 			buildPhases = (
+				954D4D527BCA5687F13DF492 /* [CP] Check Pods Manifest.lock */,
 				37845A611D994CBA009B3734 /* Sources */,
 				37845A621D994CBA009B3734 /* Frameworks */,
 				37845A631D994CBA009B3734 /* Resources */,
+				06C991A3B64263DC9C43258F /* [CP] Embed Pods Frameworks */,
+				201C4753BD8EBF1B8F560807 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,6 +183,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06C991A3B64263DC9C43258F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlertOnboarding/Pods-AlertOnboarding-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		201C4753BD8EBF1B8F560807 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlertOnboarding/Pods-AlertOnboarding-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		954D4D527BCA5687F13DF492 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		37845A611D994CBA009B3734 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -163,6 +241,7 @@
 				37845A7E1D994D87009B3734 /* AlertChildPageViewController.swift in Sources */,
 				37845A7C1D994D65009B3734 /* AlertOnboarding.swift in Sources */,
 				37845A691D994CBA009B3734 /* AppDelegate.swift in Sources */,
+				9FD0C3C41F0FA3CF005717F1 /* ExampleContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +362,7 @@
 		};
 		37845A781D994CBA009B3734 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FF27CA2DCBC1A2EF739D669 /* Pods-AlertOnboarding.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J65C27H74Y;
@@ -296,6 +376,7 @@
 		};
 		37845A791D994CBA009B3734 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26D262FDD4E3A7FC19319A1A /* Pods-AlertOnboarding.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J65C27H74Y;
