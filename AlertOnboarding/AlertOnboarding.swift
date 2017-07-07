@@ -192,7 +192,11 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //MARK: FOR ANIMATIONS ---------------------------------
-    fileprivate func animateForOpening(){
+    fileprivate func animateForOpening(animate:Bool = false){
+        if(!animate){
+            return
+        }
+        
         self.alpha = 1.0
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
@@ -200,20 +204,29 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             }, completion: nil)
     }
     
-    fileprivate func animateForEnding(){
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+    fileprivate func animateForEnding(animate:Bool = false){
+        
+        func destroy(_ completion: Bool = true) {
+            DispatchQueue.main.async {
+                () -> Void in
+                self.background.removeFromSuperview()
+                self.removeFromSuperview()
+                self.container.removeFromParentViewController()
+                self.container.view.removeFromSuperview()
+            }
+        }
+        
+        if( !animate ){
+            destroy()
+            return;
+        }
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.curveEaseOut,
+                       animations: {
             self.alpha = 0.0
-            }, completion: {
-                (finished: Bool) -> Void in
-                // On main thread
-                DispatchQueue.main.async {
-                    () -> Void in
-                    self.background.removeFromSuperview()
-                    self.removeFromSuperview()
-                    self.container.removeFromParentViewController()
-                    self.container.view.removeFromSuperview()
-                }
-        })
+        }, completion: destroy)
     }
     
     //MARK: BUTTON ACTIONS ---------------------------------
