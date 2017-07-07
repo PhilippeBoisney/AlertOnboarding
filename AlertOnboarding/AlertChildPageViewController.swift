@@ -36,7 +36,7 @@ class AlertChildPageViewController: UIViewController {
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
     
     var pageIndex: Int!
-    var _containerHeight : CGFloat = 10.0
+    var _containerHeight : CGFloat = 0.0
     var containerHeight: CGFloat {
         set {
             _containerHeight = newValue
@@ -51,21 +51,13 @@ class AlertChildPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("did load", containerHeightConstraint.constant)
+        self.contentContainer.layer.cornerRadius = 10
+        self.contentContainer.backgroundColor = UIColor(hue:0.00, saturation:0.00, brightness:1.00, alpha:0.8)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureConstraints()
-    }
-    
-    override func didMove(toParentViewController parent: UIViewController?) {
-        super.didMove(toParentViewController: parent);
-        print("did move", containerHeightConstraint.constant)
     }
 
     override func didReceiveMemoryWarning() {
