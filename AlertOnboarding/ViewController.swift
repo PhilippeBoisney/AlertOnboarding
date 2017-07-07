@@ -12,21 +12,27 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     
     var alertView: AlertOnboarding!
     
-    var arrayOfImage = ["onboarding", "graph", "train"]
-    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET ACROSS TWO LINES OR EVEN MORE.  IF POSSIBLE.", "DEPARTURE"]
+    var arrayOfImage = ["onboarding", "graph", "train","graph"]
+    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET ACROSS TWO LINES OR EVEN MORE.  IF POSSIBLE.", "DEPARTURE","SWIFTY"]
     var arrayOfDescription = ["In your profile, you can view the statistics of its operations and the recommandations of friends!",
                               "Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies. Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies!",
-                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life!"]
+                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life!","This is very Swifty"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
+        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: [self.contentExample(), self.contentExample(), self.contentExample()])
         alertView.delegate = self   
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.onTouch(self)
+    }
+    
+    func contentExample() -> UIViewController {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "exampleContent")
+        return vc
     }
     
     @IBAction func onTouch(_ sender: AnyObject) {

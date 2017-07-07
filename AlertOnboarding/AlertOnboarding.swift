@@ -20,6 +20,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     fileprivate var arrayOfImage = [String]()
     fileprivate var arrayOfTitle = [String]()
     fileprivate var arrayOfDescription = [String]()
+    fileprivate var arrayOfContainers = [UIViewController]()
     
     //FOR DESIGN    ------------------------
     open var buttonBottom: UIButton!
@@ -51,13 +52,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var delegate: AlertOnboardingDelegate?
     
     
-    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], arrayOfContainers: [UIViewController]) {
         super.init(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
-        self.configure(arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
+        self.configure()
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
-        
+        self.arrayOfContainers = arrayOfContainers
         self.interceptOrientationChange()
     }
     
@@ -73,6 +74,10 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         super.layoutSubviews()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
@@ -85,7 +90,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         self.buttonBottom.setTitleColor(colorButtonText, for: UIControlState())
         self.buttonBottom.setTitle(self.titleSkipButton, for: UIControlState())
         
-        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
+        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: self.arrayOfContainers,alertView: self)
         self.container.delegate = self
         self.insertSubview(self.container.view, aboveSubview: self)
         self.insertSubview(self.buttonBottom, aboveSubview: self)
@@ -121,8 +126,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: Check if onboarding was skipped
     fileprivate func checkIfOnboardingWasSkipped(){
         let currentStep = self.container.currentStep
-        if currentStep < (self.container.arrayOfImage.count - 1) && !self.container.isCompleted{
-            self.delegate?.alertOnboardingSkipped(currentStep, maxStep: self.container.maxStep)
+        if currentStep.isLastPageIndex && !self.container.isCompleted{
+            self.delegate?.alertOnboardingSkipped(currentStep.value, maxStep: self.container.maxStep)
         }
         else {
             self.delegate?.alertOnboardingCompleted()
@@ -131,7 +136,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     
     //MARK: FOR CONFIGURATION    --------------------------------------
-    fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    fileprivate func configure() {
         
         self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
         self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
@@ -172,7 +177,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         let verticalContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
         let heightConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (heightForAlertView*0.13 - 20.0))
         let widthConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (widthForAlertView - 20.0))
-        let pinContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -10.0)
+        let pinContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -40.0)
         
         //Constraints for container
         let verticalContraintsForContainer = NSLayoutConstraint(item: self.container.view, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
