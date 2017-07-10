@@ -12,41 +12,44 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     
     var alertView: AlertOnboarding!
     
-    var arrayOfImage = ["image1", "image2", "image3"]
-    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET", "DEPARTURE"]
-    var arrayOfDescription = ["In your profile, you can view the statistics of its operations and the recommandations of friends",
-                              "Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies",
-                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life"]
+    var arrayOfImage = ["onboarding", "graph", "train","graph"]
+    var arrayOfTitle = ["CREATE ACCOUNT", "CHOOSE THE PLANET ACROSS TWO LINES OR EVEN MORE.  IF POSSIBLE.", "DEPARTURE","SWIFTY"]
+    var arrayOfDescription = ["In your profile, you can view the statistics of its operations and the recommandations of friends!",
+                              "Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies. Purchase tickets on hot tours to your favorite planet and fly to the most comfortable intergalactic spaceships of best companies!",
+                              "In the process of flight you will be in cryogenic sleep and supply the body with all the necessary things for life!","This is very Swifty"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
-        alertView.delegate = self
+        alertView = AlertOnboarding(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: [self.contentExample(), self.contentExample(), self.contentExample(),self.contentExample()])
+        alertView.delegate = self   
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.onTouch(self)
+    }
+    
+    func contentExample() -> UIViewController {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "exampleContent")
+        return vc
     }
     
     @IBAction func onTouch(_ sender: AnyObject) {
-        
-        /*
-         
-         //IF YOU WANT TO CUSTOM ALERTVIEW
-         self.alertView.colorForAlertViewBackground = UIColor(red: 173/255, green: 206/255, blue: 183/255, alpha: 1.0)
-         self.alertView.colorButtonText = UIColor.whiteColor()
-         self.alertView.colorButtonBottomBackground = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)
-         
-         self.alertView.colorTitleLabel = UIColor.whiteColor()
-         self.alertView.colorDescriptionLabel = UIColor.whiteColor()
-         
-         self.alertView.colorPageIndicator = UIColor.whiteColor()
-         self.alertView.colorCurrentPageIndicator = UIColor(red: 65/255, green: 165/255, blue: 115/255, alpha: 1.0)
-         
-         self.alertView.percentageRatioHeight = 0.5
-         self.alertView.percentageRatioWidth = 0.5
-         
-         */
-        
-        
-        self.alertView.show()
-        
+        // IF YOU WANT TO CUSTOMISE ALERTVIEW
+        self.alertView.colorForAlertViewBackground = UIColor(hue:0.55, saturation:0.62, brightness:0.97, alpha:1.00)
+        self.alertView.colorButtonText = .white
+        self.alertView.colorButtonBottomBackground = UIColor(hue:0.59, saturation:0.89, brightness:0.98, alpha:1.00)
+
+        self.alertView.colorTitleLabel = .white
+        self.alertView.colorDescriptionLabel = .white
+
+        self.alertView.colorPageIndicator = .white
+        self.alertView.colorCurrentPageIndicator = .lightGray
+
+        self.alertView.percentageRatioHeight = 1.0
+        self.alertView.percentageRatioWidth = 1.0
+        self.alertView.show(animated:false)
     }
     
     //--------------------------------------------------------
@@ -62,7 +65,7 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
     }
     
     func alertOnboardingNext(_ nextStep: Int) {
-        print("Next step triggered! \(nextStep)")
+        
     }
     
 }
