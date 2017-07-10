@@ -12,6 +12,95 @@ protocol AlertPageViewDelegate {
     func nextStep(_ step: Int)
 }
 
+struct AlertOnboardingPageIndex {
+    
+    static let INVALID_PAGE_INDEX: Int = -1
+    
+    var value : Int = 0
+    var maximum : Int = 0
+    var valid : Bool {
+        get {
+            return self.isValueValid(self.value)
+        }
+    }
+    
+    var isLastPageIndex : Bool {
+        get {
+            return self.maximum == self.value
+        }
+    }
+    
+    // always zero, negative page indexes do not exist, ... yet
+    let minimum : Int = 0
+    
+    
+    init(_ value:Int = 0, maximum:Int = 0) {
+        self.value = value
+        self.maximum = maximum
+    }
+    
+    func next() -> Int {
+        return isValueValid(self.value + 1) ? self.value + 1 : AlertOnboardingPageIndex.INVALID_PAGE_INDEX
+    }
+    
+    func prev() -> Int {
+        return isValueValid(self.value - 1) ? self.value - 1 : AlertOnboardingPageIndex.INVALID_PAGE_INDEX
+    }
+    
+    func isValueValid (_ value: Int = -1) -> Bool {
+        return value == max(self.minimum,min(self.maximum,value))
+    }
+}
+
+struct PageViewControllerTransitions {
+    var nextIndex: Int
+}
+
+extension AlertPageViewController {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        return AlertOnboardingPageIndex.INVALID_PAGE_INDEX  == currentStep.next() ? nil : self.viewControllerAtIndex( currentStep.next() )
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        return AlertOnboardingPageIndex.INVALID_PAGE_INDEX == currentStep.prev() ? nil : self.viewControllerAtIndex( currentStep.prev() )
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let vc = pendingViewControllers[0] as? AlertChildPageViewController {
+            pageViewControllerTransition.nextIndex = vc.pageIndex
+        }
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if( !completed ){
+            return
+        }
+        
+        if( self.currentStep.value != pageViewControllerTransition.nextIndex ){
+            self.currentStep.value = pageViewControllerTransition.nextIndex
+            refresh(animated:false)
+        }
+    }
+}
+
+extension AlertPageViewController {
+    // get initialized viewcontroller from story board, depending on manual install or as cocoapod
+    func getPageContentViewController() -> AlertChildPageViewController{
+        //
+        let podBundle = Bundle(for: self.classForCoder)
+        if let bundleURL = podBundle.url(forResource: "AlertOnboardingXib", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
+                return UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
+            } else {
+                assertionFailure("Could not load the bundle.. Please re-install AlertOnboarding via Cocoapod or install it manually.")
+            }
+            //FROM MANUAL INSTALL
+        }
+        
+        return UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
+    }
+}
+
 class AlertPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     //FOR DESIGN
@@ -20,28 +109,41 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var alertview: AlertOnboarding!
     
     //FOR DATA
-    var arrayOfImage: [String]!
+    var _arrayOfImage:[String]!
+    var arrayOfImage: [String]! {
+        get {
+            return _arrayOfImage
+        }
+        
+        set {
+            _arrayOfImage = newValue
+            self.currentStep.maximum = _arrayOfImage.count - 1
+        }
+    }
     var arrayOfTitle: [String]!
     var arrayOfDescription: [String]!
-    var arrayOfContainers: [CGFloat]!
+    var arrayOfContainers: [UIViewController]!
     var viewControllers = [UIViewController]()
     
     //FOR TRACKING USER USAGE
-    var currentStep = 0
+    var pageViewControllerTransition = PageViewControllerTransitions(nextIndex: 0)
+    var currentStep : AlertOnboardingPageIndex = AlertOnboardingPageIndex()
     var maxStep = 0
-    var isCompleted = false
+    var isCompleted : Bool {
+        get {
+            return self.currentStep.isLastPageIndex
+        }
+    }
     var delegate: AlertPageViewDelegate?
     
     
-    init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding) {
+    init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], arrayOfContainers: [UIViewController], alertView: AlertOnboarding) {
         super.init(nibName: nil, bundle: nil)
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
         self.alertview = alertView
-        self.arrayOfContainers = self.arrayOfImage.map { (String) -> CGFloat in
-            return 40.0 + CGFloat(arc4random_uniform(100))
-        }
+        self.arrayOfContainers = arrayOfContainers
     }
     
     required init(coder: NSCoder) {
@@ -54,9 +156,12 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.configurePageViewController()
         self.configurePageControl()
         
+        self.refresh()
+        
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(self.pageController.view)
         self.view.addSubview(self.pageControl)
+        
         self.pageController.didMove(toParentViewController: self)
     }
     
@@ -71,83 +176,68 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         super.didReceiveMemoryWarning()
     }
     
+    func nextPage() -> Bool {
+        if self.currentStep.isLastPageIndex {
+            return false
+        }
+        
+        let nextIndex = self.currentStep.next()
+        if( nextIndex == AlertOnboardingPageIndex.INVALID_PAGE_INDEX ){
+            return false
+        }
+        
+        self.currentStep.value = nextIndex
+        self.refresh()
+        return true
+    }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func viewControllerAtIndex(_ index : Int) -> AlertChildPageViewController? {
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex!
-        
-        if(index == 0){
+        if !self.currentStep.isValueValid(index) {
             return nil
         }
         
-        index -= 1
-        return self.viewControllerAtIndex(index)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let pageContentViewController = getPageContentViewController()
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex!
-        
-        index += 1
-        
-        if(index == arrayOfImage.count){
-            return nil
-        }
-        
-        return self.viewControllerAtIndex(index)
-    }
-    
-    
-    func viewControllerAtIndex(_ index : Int) -> UIViewController? {
-        
-        var pageContentViewController: AlertChildPageViewController!
-        let podBundle = Bundle(for: self.classForCoder)
-        
-        //FROM COCOAPOD
-        if let bundleURL = podBundle.url(forResource: "AlertOnboardingXib", withExtension: "bundle") {
-            if let bundle = Bundle(url: bundleURL) {
-                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
-            } else {
-                assertionFailure("Could not load the bundle.. Please re-install AlertOnboarding via Cocoapod or install it manually.")
-            }
-            //FROM MANUAL INSTALL
-        }else {
-            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
-        }
-        
-        pageContentViewController.pageIndex = index // 0
-        
-        let realIndex = arrayOfImage.count - index - 1
-        
-        pageContentViewController.image.image = UIImage(named: arrayOfImage[realIndex])
-        pageContentViewController.labelMainTitle.text = arrayOfTitle[realIndex]
+        pageContentViewController.pageIndex = index
+        pageContentViewController.image.image = UIImage(named: arrayOfImage[index])
+        pageContentViewController.labelMainTitle.text = arrayOfTitle[index]
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
-        pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
+        pageContentViewController.labelDescription.text = arrayOfDescription[index]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
-        pageContentViewController.containerHeight = arrayOfContainers[realIndex]
+        
+        let vc = arrayOfContainers[index]
+        pageContentViewController.addChildViewController(vc)
+        pageContentViewController.view.addSubview(vc.view)
+        pageContentViewController.contentContainer = vc.view
+        vc.didMove(toParentViewController: pageContentViewController)
+        pageContentViewController.configureConstraints()
         return pageContentViewController
     }
+
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
-        let index = pageContentViewController.pageIndex
-        self.currentStep = (arrayOfImage.count - index! - 1)
-        self.delegate?.nextStep(self.currentStep)
-        //Check if user watching the last step
-        if currentStep == arrayOfImage.count - 1 {
-            self.isCompleted = true
-        }
-        //Remember the last screen user have seen
-        if currentStep > self.maxStep {
-            self.maxStep = currentStep
-        }
-        if pageControl != nil {
-            pageControl.currentPage = arrayOfImage.count - index! - 1
-            if pageControl.currentPage == arrayOfImage.count - 1 {
-                self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControlState())
-            } else {
-                self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControlState())
+    func refresh(animated:Bool = true,direction:UIPageViewControllerNavigationDirection = .forward) {
+        DispatchQueue.main.async {
+            
+            guard let currentPageViewController = self.viewControllerAtIndex(self.currentStep.value) else {
+                return
             }
+            
+            self.viewControllers = [currentPageViewController]
+            self.pageController.setViewControllers(self.viewControllers, direction: direction, animated: animated, completion: nil)
+            self.currentStep.value = (currentPageViewController as AlertChildPageViewController).pageIndex
+
+            //Remember the last screen user have seen
+            self.maxStep = max( self.maxStep, self.currentStep.value )
+            self.delegate?.nextStep(self.currentStep.value)
+            
+            if self.pageControl == nil {
+                return
+            }
+            
+            self.pageControl.currentPage = self.currentStep.value
+            let buttonLabel : String = self.currentStep.isLastPageIndex ? self.alertview.titleGotItButton : self.alertview.titleSkipButton
+            self.alertview.buttonBottom.setTitle(buttonLabel, for: UIControlState())
         }
     }
     
@@ -166,8 +256,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.pageControl.backgroundColor = UIColor.clear
         self.pageControl.pageIndicatorTintColor = alertview.colorPageIndicator
         self.pageControl.currentPageIndicatorTintColor = alertview.colorCurrentPageIndicator
-        self.pageControl.numberOfPages = arrayOfImage.count
-        self.pageControl.currentPage = 0
+        self.pageControl.numberOfPages = self.currentStep.maximum + 1
+        self.pageControl.currentPage = self.currentStep.value
         self.pageControl.isEnabled = false
         
         self.configureConstraintsForPageControl()
@@ -181,25 +271,16 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [AlertPageViewController.self])
             pageControl.pageIndicatorTintColor = UIColor.clear
             pageControl.currentPageIndicatorTintColor = UIColor.clear
-            
-        } else {
-            // Fallback on earlier versions
         }
         
         self.pageController.dataSource = self
         self.pageController.delegate = self
-        
-        let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
-        self.viewControllers = [initialViewController!]
-        self.pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
         self.addChildViewController(self.pageController)
     }
     
     //MARK: Called after notification orientation changement
     func configureConstraintsForPageControl() {
-        let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.percentageRatioHeight
-        let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
-        self.pageControl.frame = CGRect(x: 0, y: positionX, width: self.view.bounds.width, height: 50)
+        self.pageControl.frame = CGRect(x: 0, y: 15.0, width: self.view.bounds.width, height: 50)
     }
 }

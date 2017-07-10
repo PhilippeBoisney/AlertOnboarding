@@ -20,6 +20,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     fileprivate var arrayOfImage = [String]()
     fileprivate var arrayOfTitle = [String]()
     fileprivate var arrayOfDescription = [String]()
+    fileprivate var arrayOfContainers = [UIViewController]()
     
     //FOR DESIGN    ------------------------
     open var buttonBottom: UIButton!
@@ -51,13 +52,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var delegate: AlertOnboardingDelegate?
     
     
-    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], arrayOfContainers: [UIViewController]) {
         super.init(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
-        self.configure(arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
+        self.configure()
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
-        
+        self.arrayOfContainers = arrayOfContainers
         self.interceptOrientationChange()
     }
     
@@ -73,11 +74,15 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         super.layoutSubviews()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //-----------------------------------------------------------------------------------------
     // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
     
-    open func show() {
+    open func show(animated:Bool = false) {
         
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
@@ -85,7 +90,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         self.buttonBottom.setTitleColor(colorButtonText, for: UIControlState())
         self.buttonBottom.setTitle(self.titleSkipButton, for: UIControlState())
         
-        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
+        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, arrayOfContainers: self.arrayOfContainers,alertView: self)
         self.container.delegate = self
         self.insertSubview(self.container.view, aboveSubview: self)
         self.insertSubview(self.buttonBottom, aboveSubview: self)
@@ -101,15 +106,15 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             superView.addSubview(self.background)
             superView.addSubview(self)
             self.configureConstraints(topController.view)
-            self.animateForOpening()
+            self.animateForOpening(animated)
         }
     }
     
     //Hide onboarding with animation
-    open func hide(){
+    open func hide(animated:Bool = false){
         self.checkIfOnboardingWasSkipped()
         DispatchQueue.main.async { () -> Void in
-            self.animateForEnding()
+            self.animateForEnding(animated)
         }
     }
     
@@ -121,8 +126,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: Check if onboarding was skipped
     fileprivate func checkIfOnboardingWasSkipped(){
         let currentStep = self.container.currentStep
-        if currentStep < (self.container.arrayOfImage.count - 1) && !self.container.isCompleted{
-            self.delegate?.alertOnboardingSkipped(currentStep, maxStep: self.container.maxStep)
+        if currentStep.isLastPageIndex && !self.container.isCompleted{
+            self.delegate?.alertOnboardingSkipped(currentStep.value, maxStep: self.container.maxStep)
         }
         else {
             self.delegate?.alertOnboardingCompleted()
@@ -131,11 +136,12 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     
     //MARK: FOR CONFIGURATION    --------------------------------------
-    fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    fileprivate func configure() {
         
         self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
         self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
         self.buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), for: .touchUpInside)
+        self.buttonBottom.layer.cornerRadius = 10.0
         
         self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
         self.background.backgroundColor = UIColor.black
@@ -169,9 +175,9 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         
         //Constraints for button
         let verticalContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
-        let heightConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView*0.1)
-        let widthConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
-        let pinContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0)
+        let heightConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (heightForAlertView*0.13 - 20.0))
+        let widthConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (widthForAlertView - 20.0))
+        let pinContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -40.0)
         
         //Constraints for container
         let verticalContraintsForContainer = NSLayoutConstraint(item: self.container.view, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
@@ -191,7 +197,11 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //MARK: FOR ANIMATIONS ---------------------------------
-    fileprivate func animateForOpening(){
+    fileprivate func animateForOpening(_ animate:Bool = false){
+        if(!animate){
+            return
+        }
+        
         self.alpha = 1.0
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
@@ -199,26 +209,40 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             }, completion: nil)
     }
     
-    fileprivate func animateForEnding(){
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+    fileprivate func animateForEnding(_ animate:Bool = false){
+        
+        func destroy(_ completion: Bool = true) {
+            DispatchQueue.main.async {
+                () -> Void in
+                self.background.removeFromSuperview()
+                self.removeFromSuperview()
+                self.container.removeFromParentViewController()
+                self.container.view.removeFromSuperview()
+            }
+        }
+        
+        if( !animate ){
+            destroy()
+            return;
+        }
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: UIViewAnimationOptions.curveEaseOut,
+                       animations: {
             self.alpha = 0.0
-            }, completion: {
-                (finished: Bool) -> Void in
-                // On main thread
-                DispatchQueue.main.async {
-                    () -> Void in
-                    self.background.removeFromSuperview()
-                    self.removeFromSuperview()
-                    self.container.removeFromParentViewController()
-                    self.container.view.removeFromSuperview()
-                }
-        })
+        }, completion: destroy)
     }
     
     //MARK: BUTTON ACTIONS ---------------------------------
     
     func onClick(){
-        self.hide()
+        // try to go to the next page
+        // if there are no pages left, 
+        // close the onboarding view
+        if !self.container.nextPage() {
+            self.hide()
+        }
     }
     
     //MARK: ALERTPAGEVIEWDELEGATE    --------------------------------------
