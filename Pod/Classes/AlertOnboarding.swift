@@ -217,7 +217,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     //MARK: BUTTON ACTIONS ---------------------------------
     
-    func onClick(){
+    @objc func onClick(){
         self.hide()
     }
     
@@ -242,7 +242,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(AlertOnboarding.onOrientationChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    func onOrientationChange(){
+    @objc func onOrientationChange(){
         if let superview = self.superview {
             self.configureConstraints(superview)
             self.container.configureConstraintsForPageControl()
