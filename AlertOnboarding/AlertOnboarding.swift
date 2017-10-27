@@ -4,7 +4,6 @@
 //
 //  Created by Philippe on 26/09/2016.
 //  Copyright © 2016 CookMinute. All rights reserved.
-//  Daniel Zanchi
 
 import UIKit
 
