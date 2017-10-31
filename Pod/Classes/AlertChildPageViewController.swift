@@ -23,4 +23,9 @@ class AlertChildPageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func changeContentModeForImages(contentMode: UIViewContentMode) {
+        print("changing content mode")
+        self.image.contentMode = contentMode
+    }
 }

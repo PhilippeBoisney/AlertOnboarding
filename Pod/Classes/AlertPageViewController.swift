@@ -19,6 +19,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var pageControl: UIPageControl!
     var alertview: AlertOnboarding!
     
+    var imageContentView: UIViewContentMode!
+    
     //FOR DATA
     var arrayOfImage: [String]!
     var arrayOfTitle: [String]!
@@ -32,12 +34,14 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var delegate: AlertPageViewDelegate?
     
     
-    init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding) {
+    init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding, imageContentMode icm: UIViewContentMode) {
         super.init(nibName: nil, bundle: nil)
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
         self.alertview = alertView
+        
+        self.imageContentView = icm
     }
     
     required init(coder: NSCoder) {
@@ -111,11 +115,13 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
         }
         
+        
         pageContentViewController.pageIndex = index // 0
         
         let realIndex = arrayOfImage.count - index - 1
         
         pageContentViewController.image.image = UIImage(named: arrayOfImage[realIndex])
+        pageContentViewController.image.contentMode = self.imageContentView
         pageContentViewController.labelMainTitle.text = arrayOfTitle[realIndex]
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
