@@ -4,6 +4,7 @@
 //
 //  Created by Philippe on 26/09/2016.
 //  Copyright © 2016 CookMinute. All rights reserved.
+//
 
 import UIKit
 
@@ -24,7 +25,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var buttonBottom: UIButton!
     fileprivate var container: AlertPageViewController!
     open var background: UIView!
-    
+
     
     //PUBLIC VARS   ------------------------
     open var colorForAlertViewBackground: UIColor = UIColor.white
@@ -48,6 +49,9 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var titleGotItButton = "GOT IT !"
     
     open var delegate: AlertOnboardingDelegate?
+    
+    open var shouldBlur = false
+    open var imageContentMode = UIViewContentMode.scaleToFill
     
     
     public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
@@ -77,14 +81,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //-----------------------------------------------------------------------------------------
     
     open func show() {
-        
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
         self.backgroundColor = colorForAlertViewBackground
         self.buttonBottom.setTitleColor(colorButtonText, for: UIControlState())
         self.buttonBottom.setTitle(self.titleSkipButton, for: UIControlState())
         
-        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
+        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self, imageContentMode: self.imageContentMode)
         self.container.delegate = self
         self.insertSubview(self.container.view, aboveSubview: self)
         self.insertSubview(self.buttonBottom, aboveSubview: self)
@@ -92,6 +95,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         // Only show once
         if self.superview != nil {
             return
+        }
+        
+        
+        
+        //here I check if I should blur the view -----------------------
+        if self.shouldBlur {
+            self.background = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         }
         
         // Find current stop viewcontroller
