@@ -116,6 +116,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let realIndex = arrayOfImage.count - index - 1
         
         pageContentViewController.image.image = UIImage(named: arrayOfImage[realIndex])
+        pageContentViewController.image.layer.minificationFilter=kCAFilterTrilinear
         pageContentViewController.labelMainTitle.text = arrayOfTitle[realIndex]
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
