@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol AlertOnboardingDelegate {
+@objc public protocol AlertOnboardingDelegate {
     func alertOnboardingSkipped(_ currentStep: Int, maxStep: Int)
     func alertOnboardingCompleted()
     func alertOnboardingNext(_ nextStep: Int)
@@ -28,16 +28,16 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     
     //PUBLIC VARS   ------------------------
-    open var colorForAlertViewBackground: UIColor = UIColor.white
+    @objc open var colorForAlertViewBackground: UIColor = UIColor.white
     
-    open var colorButtonBottomBackground: UIColor = UIColor(red: 226/255, green: 237/255, blue: 248/255, alpha: 1.0)
-    open var colorButtonText: UIColor = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
+    @objc open var colorButtonBottomBackground: UIColor = UIColor(red: 226/255, green: 237/255, blue: 248/255, alpha: 1.0)
+    @objc open var colorButtonText: UIColor = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
     
-    open var colorTitleLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
-    open var colorDescriptionLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorTitleLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorDescriptionLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
     
-    open var colorPageIndicator = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
-    open var colorCurrentPageIndicator = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
+    @objc open var colorPageIndicator = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorCurrentPageIndicator = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
     
     open var heightForAlertView: CGFloat!
     open var widthForAlertView: CGFloat!
@@ -45,13 +45,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var percentageRatioHeight: CGFloat = 0.8
     open var percentageRatioWidth: CGFloat = 0.8
     
-    open var titleSkipButton = "SKIP"
-    open var titleGotItButton = "GOT IT !"
+    @objc open var titleSkipButton = "SKIP"
+    @objc open var titleGotItButton = "GOT IT !"
     
-    open var delegate: AlertOnboardingDelegate?
+    @objc open var delegate: AlertOnboardingDelegate?
     
     
-    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    @objc public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         super.init(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
         self.configure(arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
         self.arrayOfImage = arrayOfImage
@@ -77,7 +77,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
     
-    open func show() {
+    @objc open func show() {
         
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
@@ -106,7 +106,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //Hide onboarding with animation
-    open func hide(){
+    @objc open func hide(){
         self.checkIfOnboardingWasSkipped()
         DispatchQueue.main.async { () -> Void in
             self.animateForEnding()
