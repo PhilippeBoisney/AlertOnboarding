@@ -45,6 +45,9 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var percentageRatioHeight: CGFloat = 0.8
     open var percentageRatioWidth: CGFloat = 0.8
     
+    @objc open var nextInsteadOfSkip = false
+    
+    @objc open var titleNextButton = "NEXT"
     @objc open var titleSkipButton = "SKIP"
     @objc open var titleGotItButton = "GOT IT !"
     
@@ -218,6 +221,16 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: BUTTON ACTIONS ---------------------------------
     
     @objc func onClick(){
+        if (nextInsteadOfSkip) {
+            if let viewController = self.container.viewControllerAtIndex((self.container.pageController.viewControllers?[0] as! AlertChildPageViewController).pageIndex!-1)
+            {
+                self.container.pageController.setViewControllers([viewController], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+                self.container.didMoveToPageIndex(pageIndex: (viewController as! AlertChildPageViewController).pageIndex)
+                
+                return;
+            }
+        }
+        
         self.hide()
     }
     
