@@ -39,11 +39,11 @@
                         <constraints>
                             <constraint firstItem="64e-Bi-ts0" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="14" id="9bY-Oy-RjP"/>
                             <constraint firstAttribute="trailing" secondItem="eh1-05-M15" secondAttribute="trailing" constant="14" id="D32-SW-K7R"/>
-                            <constraint firstItem="eh1-05-M15" firstAttribute="top" secondItem="64e-Bi-ts0" secondAttribute="bottom" constant="14" id="cpQ-i1-7gA"/>
+                            <constraint firstItem="eh1-05-M15" firstAttribute="top" secondItem="64e-Bi-ts0" secondAttribute="bottom" constant="10" id="cpQ-i1-7gA"/>
                             <constraint firstAttribute="trailing" secondItem="64e-Bi-ts0" secondAttribute="trailing" constant="14" id="fTP-Ao-j9O"/>
                             <constraint firstItem="eh1-05-M15" firstAttribute="centerX" secondItem="ozM-3f-JWg" secondAttribute="centerX" id="mFw-fv-u7r"/>
                             <constraint firstItem="eh1-05-M15" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="14" id="put-D4-Yuc"/>
-                            <constraint firstItem="64e-Bi-ts0" firstAttribute="top" secondItem="ozM-3f-JWg" secondAttribute="top" constant="14" id="rib-H8-35l"/>
+                            <constraint firstItem="64e-Bi-ts0" firstAttribute="top" secondItem="ozM-3f-JWg" secondAttribute="top" constant="10" id="rib-H8-35l"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idc-BF-yRA" userLabel="View 1:2">
