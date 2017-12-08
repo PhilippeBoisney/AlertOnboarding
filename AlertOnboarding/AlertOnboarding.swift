@@ -8,10 +8,12 @@
 
 import UIKit
 
-public protocol AlertOnboardingDelegate {
+@objc public protocol AlertOnboardingDelegate {
     func alertOnboardingSkipped(_ currentStep: Int, maxStep: Int)
     func alertOnboardingCompleted()
     func alertOnboardingNext(_ nextStep: Int)
+    
+    @objc optional func alertOnboardingDidDisplayStep(alertOnboarding: AlertOnboarding, alertChildPageViewController: AlertChildPageViewController, step: Int)
 }
 
 open class AlertOnboarding: UIView, AlertPageViewDelegate {
@@ -28,30 +30,37 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     
     //PUBLIC VARS   ------------------------
-    open var colorForAlertViewBackground: UIColor = UIColor.white
+    @objc open var colorForAlertViewBackground: UIColor = UIColor.white
     
-    open var colorButtonBottomBackground: UIColor = UIColor(red: 226/255, green: 237/255, blue: 248/255, alpha: 1.0)
-    open var colorButtonText: UIColor = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
+    @objc open var colorButtonBottomBackground: UIColor = UIColor(red: 226/255, green: 237/255, blue: 248/255, alpha: 1.0)
+    @objc open var colorButtonText: UIColor = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
     
-    open var colorTitleLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
-    open var colorDescriptionLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorTitleLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorDescriptionLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
     
-    open var colorPageIndicator = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
-    open var colorCurrentPageIndicator = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
+    @objc open var fontTitleLabel: UIFont? = UIFont(name: "Avenir-Heavy", size: 17);
+    @objc open var fontDescriptionLabel: UIFont? = UIFont(name: "Avenir-Book", size: 13);
+    @objc open var fontButtonText: UIFont? = UIFont(name: "Avenir-Black", size: 15);
+    
+    @objc open var colorPageIndicator = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
+    @objc open var colorCurrentPageIndicator = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
     
     open var heightForAlertView: CGFloat!
     open var widthForAlertView: CGFloat!
     
-    open var percentageRatioHeight: CGFloat = 0.8
-    open var percentageRatioWidth: CGFloat = 0.8
+    @objc open var percentageRatioHeight: CGFloat = 0.8
+    @objc open var percentageRatioWidth: CGFloat = 0.8
     
-    open var titleSkipButton = "SKIP"
-    open var titleGotItButton = "GOT IT !"
+    @objc open var nextInsteadOfSkip = false
     
-    open var delegate: AlertOnboardingDelegate?
+    @objc open var titleNextButton = "NEXT"
+    @objc open var titleSkipButton = "SKIP"
+    @objc open var titleGotItButton = "GOT IT !"
+    
+    @objc open var delegate: AlertOnboardingDelegate?
     
     
-    public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
+    @objc public init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         super.init(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
         self.configure(arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription)
         self.arrayOfImage = arrayOfImage
@@ -77,7 +86,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
     
-    open func show() {
+    @objc open func show() {
         
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
@@ -106,7 +115,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //Hide onboarding with animation
-    open func hide(){
+    @objc open func hide(){
         self.checkIfOnboardingWasSkipped()
         DispatchQueue.main.async { () -> Void in
             self.animateForEnding()
@@ -134,7 +143,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         
         self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
-        self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
+        self.buttonBottom.titleLabel?.font = fontButtonText
         self.buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), for: .touchUpInside)
         
         self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
@@ -218,6 +227,16 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: BUTTON ACTIONS ---------------------------------
     
     @objc func onClick(){
+        if (nextInsteadOfSkip) {
+            if let viewController = self.container.viewControllerAtIndex((self.container.pageController.viewControllers?[0] as! AlertChildPageViewController).pageIndex!-1)
+            {
+                self.container.pageController.setViewControllers([viewController], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+                self.container.didMoveToPageIndex(pageIndex: (viewController as! AlertChildPageViewController).pageIndex)
+                
+                return;
+            }
+        }
+        
         self.hide()
     }
     

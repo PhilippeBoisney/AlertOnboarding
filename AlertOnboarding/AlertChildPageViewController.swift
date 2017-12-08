@@ -8,19 +8,19 @@
 
 import UIKit
 
-class AlertChildPageViewController: UIViewController {
+@objc public class AlertChildPageViewController: UIViewController {
     
-    var pageIndex: Int!
+    internal(set) var pageIndex: Int!
     
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var labelMainTitle: UILabel!
-    @IBOutlet weak var labelDescription: UILabel!
+    @objc @IBOutlet public private(set) weak var image: UIImageView!
+    @objc @IBOutlet public private(set) weak var labelMainTitle: UILabel!
+    @objc @IBOutlet public private(set) weak var labelDescription: UILabel!
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }

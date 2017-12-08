@@ -47,6 +47,10 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (alertview.nextInsteadOfSkip) {
+            self.alertview.buttonBottom.setTitle(alertview.titleNextButton, for: UIControlState())
+        }
+        
         self.configurePageViewController()
         self.configurePageControl()
         
@@ -95,6 +99,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     func viewControllerAtIndex(_ index : Int) -> UIViewController? {
+        if (index<0 || index>=arrayOfImage.count) {
+            return nil;
+        }
         
         var pageContentViewController: AlertChildPageViewController!
         let podBundle = Bundle(for: self.classForCoder)
@@ -116,8 +123,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let realIndex = arrayOfImage.count - index - 1
         
         pageContentViewController.image.image = UIImage(named: arrayOfImage[realIndex])
+        pageContentViewController.image.layer.minificationFilter=kCAFilterTrilinear
+        pageContentViewController.labelMainTitle.font = alertview.fontTitleLabel
         pageContentViewController.labelMainTitle.text = arrayOfTitle[realIndex]
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
+        pageContentViewController.labelDescription.font = alertview.fontDescriptionLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
         
@@ -125,9 +135,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
-        let index = pageContentViewController.pageIndex
-        self.currentStep = (arrayOfImage.count - index! - 1)
+        didMoveToPageIndex(pageIndex: (pageViewController.viewControllers![0] as! AlertChildPageViewController).pageIndex)
+    }
+    
+    func didMoveToPageIndex(pageIndex: Int) {
+        self.currentStep = (arrayOfImage.count - pageIndex - 1)
         self.delegate?.nextStep(self.currentStep)
         //Check if user watching the last step
         if currentStep == arrayOfImage.count - 1 {
@@ -138,13 +150,21 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             self.maxStep = currentStep
         }
         if pageControl != nil {
-            pageControl.currentPage = arrayOfImage.count - index! - 1
+            pageControl.currentPage = arrayOfImage.count - pageIndex - 1
             if pageControl.currentPage == arrayOfImage.count - 1 {
                 self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControlState())
+            } else if (alertview.nextInsteadOfSkip) {
+                self.alertview.buttonBottom.setTitle(alertview.titleNextButton, for: UIControlState())
             } else {
                 self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControlState())
             }
         }
+        
+        if self.alertview.delegate?.alertOnboardingDidDisplayStep != nil {
+            (self.alertview.delegate?.alertOnboardingDidDisplayStep)!(self.alertview, (self.pageController.viewControllers?.first)! as! AlertChildPageViewController, self.currentStep)
+            
+        }
+        
     }
     
     
@@ -188,6 +208,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
         self.viewControllers = [initialViewController!]
         self.pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
+        
+        didMoveToPageIndex(pageIndex: arrayOfImage.count-1)
         
         self.addChildViewController(self.pageController)
     }

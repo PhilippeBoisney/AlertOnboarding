@@ -22,13 +22,13 @@
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozM-3f-JWg" userLabel="View 2:2">
                         <frame key="frameInset" minY="314" width="600" height="286"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHOOSE THE PLANET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64e-Bi-ts0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHOOSE THE PLANET" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64e-Bi-ts0">
                                 <frame key="frameInset" minX="8" minY="8" width="584" height="57"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="0.6705882353" green="0.69411764710000001" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-05-M15">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-05-M15">
                                 <frame key="frameInset" minX="8" minY="92" width="584" height="21"/>
                                 <string key="text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
@@ -37,12 +37,12 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="64e-Bi-ts0" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="10" id="9bY-Oy-RjP"/>
-                            <constraint firstAttribute="trailing" secondItem="eh1-05-M15" secondAttribute="trailing" constant="10" id="D32-SW-K7R"/>
+                            <constraint firstItem="64e-Bi-ts0" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="14" id="9bY-Oy-RjP"/>
+                            <constraint firstAttribute="trailing" secondItem="eh1-05-M15" secondAttribute="trailing" constant="14" id="D32-SW-K7R"/>
                             <constraint firstItem="eh1-05-M15" firstAttribute="top" secondItem="64e-Bi-ts0" secondAttribute="bottom" constant="10" id="cpQ-i1-7gA"/>
-                            <constraint firstAttribute="trailing" secondItem="64e-Bi-ts0" secondAttribute="trailing" constant="10" id="fTP-Ao-j9O"/>
+                            <constraint firstAttribute="trailing" secondItem="64e-Bi-ts0" secondAttribute="trailing" constant="14" id="fTP-Ao-j9O"/>
                             <constraint firstItem="eh1-05-M15" firstAttribute="centerX" secondItem="ozM-3f-JWg" secondAttribute="centerX" id="mFw-fv-u7r"/>
-                            <constraint firstItem="eh1-05-M15" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="10" id="put-D4-Yuc"/>
+                            <constraint firstItem="eh1-05-M15" firstAttribute="leading" secondItem="ozM-3f-JWg" secondAttribute="leading" constant="14" id="put-D4-Yuc"/>
                             <constraint firstItem="64e-Bi-ts0" firstAttribute="top" secondItem="ozM-3f-JWg" secondAttribute="top" constant="10" id="rib-H8-35l"/>
                         </constraints>
                     </view>
