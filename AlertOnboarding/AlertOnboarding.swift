@@ -46,8 +46,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var heightForAlertView: CGFloat!
     open var widthForAlertView: CGFloat!
     
-    open var percentageRatioHeight: CGFloat = 0.8
-    open var percentageRatioWidth: CGFloat = 0.8
+    @objc open var percentageRatioHeight: CGFloat = 0.8
+    @objc open var percentageRatioWidth: CGFloat = 0.8
     
     @objc open var nextInsteadOfSkip = false
     
