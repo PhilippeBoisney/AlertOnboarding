@@ -12,6 +12,8 @@ import UIKit
     func alertOnboardingSkipped(_ currentStep: Int, maxStep: Int)
     func alertOnboardingCompleted()
     func alertOnboardingNext(_ nextStep: Int)
+    
+    @objc optional func alertOnboardingDidDisplayStep(alertOnboarding: AlertOnboarding, alertChildPageViewController: AlertChildPageViewController, step: Int)
 }
 
 open class AlertOnboarding: UIView, AlertPageViewDelegate {

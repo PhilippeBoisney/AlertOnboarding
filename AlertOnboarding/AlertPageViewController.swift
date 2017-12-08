@@ -159,6 +159,12 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
                 self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControlState())
             }
         }
+        
+        if self.alertview.delegate?.alertOnboardingDidDisplayStep != nil {
+            (self.alertview.delegate?.alertOnboardingDidDisplayStep)!(self.alertview, (self.pageController.viewControllers?.first)! as! AlertChildPageViewController, self.currentStep)
+            
+        }
+        
     }
     
     
@@ -202,6 +208,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
         self.viewControllers = [initialViewController!]
         self.pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
+        
+        didMoveToPageIndex(pageIndex: arrayOfImage.count-1)
         
         self.addChildViewController(self.pageController)
     }
