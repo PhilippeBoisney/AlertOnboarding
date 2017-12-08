@@ -124,8 +124,10 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         pageContentViewController.image.image = UIImage(named: arrayOfImage[realIndex])
         pageContentViewController.image.layer.minificationFilter=kCAFilterTrilinear
+        pageContentViewController.labelMainTitle.font = alertview.fontTitleLabel
         pageContentViewController.labelMainTitle.text = arrayOfTitle[realIndex]
         pageContentViewController.labelMainTitle.textColor = alertview.colorTitleLabel
+        pageContentViewController.labelDescription.font = alertview.fontDescriptionLabel
         pageContentViewController.labelDescription.text = arrayOfDescription[realIndex]
         pageContentViewController.labelDescription.textColor = alertview.colorDescriptionLabel
         

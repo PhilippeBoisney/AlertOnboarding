@@ -36,6 +36,10 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     @objc open var colorTitleLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
     @objc open var colorDescriptionLabel: UIColor = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
     
+    @objc open var fontTitleLabel: UIFont? = UIFont(name: "Avenir-Heavy", size: 17);
+    @objc open var fontDescriptionLabel: UIFont? = UIFont(name: "Avenir-Book", size: 13);
+    @objc open var fontButtonText: UIFont? = UIFont(name: "Avenir-Black", size: 15);
+    
     @objc open var colorPageIndicator = UIColor(red: 171/255, green: 177/255, blue: 196/255, alpha: 1.0)
     @objc open var colorCurrentPageIndicator = UIColor(red: 118/255, green: 125/255, blue: 152/255, alpha: 1.0)
     
@@ -137,7 +141,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         
         self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
-        self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
+        self.buttonBottom.titleLabel?.font = fontButtonText
         self.buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), for: .touchUpInside)
         
         self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
