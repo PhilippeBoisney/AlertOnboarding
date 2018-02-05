@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="MarkerFeltThin.ttf">
+            <string>MarkerFelt-Thin</string>
+        </array>
+        <array key="MarkerFeltWide.ttf">
+            <string>MarkerFelt-Wide</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,19 +30,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozM-3f-JWg" userLabel="View 2:2">
-                        <frame key="frameInset" minY="314" width="600" height="286"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozM-3f-JWg" userLabel="View 2:2">
+                        <rect key="frame" x="0.0" y="433.5" width="375" height="233.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHOOSE THE PLANET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64e-Bi-ts0">
-                                <frame key="frameInset" minX="8" minY="8" width="584" height="57"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHOOSE THE PLANET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64e-Bi-ts0">
+                                <rect key="frame" x="10" y="10" width="355" height="22.5"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
                                 <color key="textColor" red="0.6705882353" green="0.69411764710000001" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-05-M15">
-                                <frame key="frameInset" minX="8" minY="92" width="584" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-05-M15">
+                                <rect key="frame" x="10" y="42.5" width="355" height="76.5"/>
                                 <string key="text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</string>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="14"/>
                                 <color key="textColor" red="0.6705882353" green="0.69411764710000001" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,18 +57,21 @@
                             <constraint firstItem="64e-Bi-ts0" firstAttribute="top" secondItem="ozM-3f-JWg" secondAttribute="top" constant="10" id="rib-H8-35l"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idc-BF-yRA" userLabel="View 1:2">
-                        <frame key="frameInset" width="600" height="313"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idc-BF-yRA" userLabel="View 1:2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="433.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BOp-iF-ff6">
-                                <frame key="frameInset" minX="157" minY="45" width="286" height="223"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BOp-iF-ff6">
+                                <rect key="frame" x="24" y="53.5" width="327" height="327"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BOp-iF-ff6" secondAttribute="height" multiplier="1:1" id="TPE-Vx-D0c"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="BOp-iF-ff6" firstAttribute="centerX" secondItem="idc-BF-yRA" secondAttribute="centerX" id="4uh-YD-I07"/>
-                            <constraint firstItem="BOp-iF-ff6" firstAttribute="width" secondItem="idc-BF-yRA" secondAttribute="height" multiplier="0.8" id="JQe-2J-Cdd"/>
+                            <constraint firstAttribute="trailing" secondItem="BOp-iF-ff6" secondAttribute="trailing" constant="24" id="E7q-cu-vRO"/>
                             <constraint firstItem="BOp-iF-ff6" firstAttribute="centerY" secondItem="idc-BF-yRA" secondAttribute="centerY" id="SfY-fI-spo"/>
-                            <constraint firstItem="BOp-iF-ff6" firstAttribute="height" secondItem="idc-BF-yRA" secondAttribute="height" multiplier="0.8" id="lpb-33-HGv"/>
+                            <constraint firstItem="BOp-iF-ff6" firstAttribute="leading" secondItem="idc-BF-yRA" secondAttribute="leading" constant="24" id="VJe-J0-YCs"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -85,8 +99,8 @@
                     <mask key="constraints">
                         <include reference="9EX-Px-g1g"/>
                         <exclude reference="yP1-qO-zR9"/>
-                        <exclude reference="bk9-sX-BJj"/>
                         <include reference="5NH-Qw-DpT"/>
+                        <exclude reference="bk9-sX-BJj"/>
                     </mask>
                 </variation>
             </view>

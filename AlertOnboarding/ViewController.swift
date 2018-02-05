@@ -42,8 +42,13 @@ class ViewController: UIViewController, AlertOnboardingDelegate {
          self.alertView.percentageRatioHeight = 0.5
          self.alertView.percentageRatioWidth = 0.5
          
-         */
+ 
         
+        self.alertView.imageContentMode = .scaleAspectFit
+        
+        self.alertView.shouldBlur = true
+ 
+        */
         
         self.alertView.show()
         
