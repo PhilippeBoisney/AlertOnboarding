@@ -139,7 +139,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         
         self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
         self.background.backgroundColor = UIColor.black
-        self.background.alpha = 0.5
+        self.background.alpha = 0.0
         
         
         self.clipsToBounds = true
@@ -195,6 +195,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         self.alpha = 1.0
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.background.alpha = 0.5
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
             }, completion: nil)
     }
