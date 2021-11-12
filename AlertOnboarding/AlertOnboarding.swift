@@ -192,35 +192,43 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //MARK: FOR ANIMATIONS
-    fileprivate func animateForOpening(){
+    fileprivate func animateForOpening() {
         self.alpha = 1.0
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-        UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+        UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { [weak self] in
+            guard let self = self else { return }
+
             self.background.alpha = 0.5
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
             }, completion: nil)
     }
     
-    fileprivate func animateForEnding(){
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+    fileprivate func animateForEnding() {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: { [weak self] in
+            guard let self = self else { return }
+
             self.alpha = 0.0
             self.background.alpha = 0.0
-            }, completion: {
-                (finished: Bool) -> Void in
+            }, completion: { [weak self] finished in
                 // On main thread
-                DispatchQueue.main.async {
-                    () -> Void in
-                    self.background.removeFromSuperview()
-                    self.removeFromSuperview()
-                    self.container.removeFromParent()
-                    self.container.view.removeFromSuperview()
-                }
+                self?.endingAnimationCompleted()
         })
+    }
+
+    private func endingAnimationCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            self.background.removeFromSuperview()
+            self.removeFromSuperview()
+            self.container.removeFromParent()
+            self.container.view.removeFromSuperview()
+        }
     }
     
     //MARK: BUTTON ACTIONS
     
-    @objc func onClick(){
+    @objc func onClick() {
         hide()
     }
     
