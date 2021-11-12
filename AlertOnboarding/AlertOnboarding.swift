@@ -22,9 +22,10 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     fileprivate var arrayOfDescription = [String]()
     
     //FOR DESIGN    ------------------------
-    open var buttonBottom: UIButton!
+    open var buttonBottom = UIButton()
+
     fileprivate var container: AlertPageViewController!
-    open var background: UIView!
+    open var background = UIView()
     
     
     //PUBLIC VARS   ------------------------
@@ -181,8 +182,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         
         
         //Constraints for background
-        let widthContraintsForBackground = NSLayoutConstraint(item: self.background, attribute:.width, relatedBy: .equal, toItem: superView, attribute: .width, multiplier: 1, constant: 0)
-        let heightConstraintForBackground = NSLayoutConstraint.init(item: self.background, attribute: .height, relatedBy: .equal, toItem: superView, attribute: .height, multiplier: 1, constant: 0)
+        let widthContraintsForBackground = NSLayoutConstraint(item: background, attribute:.width, relatedBy: .equal, toItem: superView, attribute: .width, multiplier: 1, constant: 0)
+        let heightConstraintForBackground = NSLayoutConstraint.init(item: background, attribute: .height, relatedBy: .equal, toItem: superView, attribute: .height, multiplier: 1, constant: 0)
         
         NSLayoutConstraint.activate([horizontalContraintsAlertView, verticalContraintsAlertView,heightConstraintForAlertView, widthConstraintForAlertView,
                                      verticalContraintsButtonBottom, heightConstraintForButtonBottom, widthConstraintForButtonBottom, pinContraintsButtonBottom,

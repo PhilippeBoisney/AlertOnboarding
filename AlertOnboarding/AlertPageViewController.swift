@@ -20,9 +20,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     var alertview: AlertOnboarding!
     
     //FOR DATA
-    var arrayOfImage: [String]!
-    var arrayOfTitle: [String]!
-    var arrayOfDescription: [String]!
+    var arrayOfImage: [String]
+    var arrayOfTitle: [String]
+    var arrayOfDescription: [String]
     var viewControllers = [UIViewController]()
     
     //FOR TRACKING USER USAGE
@@ -33,10 +33,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     init (arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String], alertView: AlertOnboarding) {
-        super.init(nibName: nil, bundle: nil)
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
+
+        super.init(nibName: nil, bundle: nil)
         self.alertview = alertView
     }
     
