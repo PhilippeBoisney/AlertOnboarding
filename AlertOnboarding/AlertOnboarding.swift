@@ -74,7 +74,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     //-----------------------------------------------------------------------------------------
-    // MARK: PUBLIC FUNCTIONS    --------------------------------------------------------------
+    // MARK: PUBLIC FUNCTIONS
     //-----------------------------------------------------------------------------------------
     
     open func show() {
@@ -115,7 +115,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     
     //------------------------------------------------------------------------------------------
-    // MARK: PRIVATE FUNCTIONS    --------------------------------------------------------------
+    // MARK: PRIVATE FUNCTIONS
     //------------------------------------------------------------------------------------------
     
     //MARK: Check if onboarding was skipped
@@ -130,7 +130,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     }
     
     
-    //MARK: FOR CONFIGURATION    --------------------------------------
+    //MARK: FOR CONFIGURATION
     fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         
         self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
@@ -190,7 +190,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
                                      widthContraintsForBackground, heightConstraintForBackground])
     }
     
-    //MARK: FOR ANIMATIONS ---------------------------------
+    //MARK: FOR ANIMATIONS
     fileprivate func animateForOpening(){
         self.alpha = 1.0
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
@@ -217,19 +217,19 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         })
     }
     
-    //MARK: BUTTON ACTIONS ---------------------------------
+    //MARK: BUTTON ACTIONS
     
     @objc func onClick(){
         self.hide()
     }
     
-    //MARK: ALERTPAGEVIEWDELEGATE    --------------------------------------
+    //MARK: ALERTPAGEVIEWDELEGATE
     
     func nextStep(_ step: Int) {
         self.delegate?.alertOnboardingNext(step)
     }
     
-    //MARK: OTHERS    --------------------------------------
+    //MARK: OTHERS
     fileprivate func getTopViewController() -> UIViewController? {
         var topController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
         while topController?.presentedViewController != nil {
@@ -238,7 +238,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         return topController
     }
     
-    //MARK: NOTIFICATIONS PROCESS ------------------------------------------
+    //MARK: NOTIFICATIONS PROCESS
     fileprivate func interceptOrientationChange(){
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(AlertOnboarding.onOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
