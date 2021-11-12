@@ -15,9 +15,14 @@ protocol AlertPageViewDelegate {
 class AlertPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     //FOR DESIGN
-    var pageController: UIPageViewController!
+    var pageController: UIPageViewController = {
+        let pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageController.view.backgroundColor = .clear
+        return pageController
+    }()
+
     var pageControl: UIPageControl!
-    var alertview: AlertOnboarding!
+    var alertview: AlertOnboarding
     
     //FOR DATA
     var arrayOfImage: [String]
@@ -36,9 +41,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.arrayOfImage = arrayOfImage
         self.arrayOfTitle = arrayOfTitle
         self.arrayOfDescription = arrayOfDescription
+        self.alertview = alertView
 
         super.init(nibName: nil, bundle: nil)
-        self.alertview = alertView
     }
     
     required init(coder: NSCoder) {
@@ -171,9 +176,6 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     fileprivate func configurePageViewController(){
-        self.pageController = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
-        self.pageController.view.backgroundColor = UIColor.clear
-        
         if #available(iOS 9.0, *) {
             let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [AlertPageViewController.self])
             pageControl.pageIndicatorTintColor = UIColor.clear
@@ -183,14 +185,14 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             // Fallback on earlier versions
         }
         
-        self.pageController.dataSource = self
-        self.pageController.delegate = self
+        pageController.dataSource = self
+        pageController.delegate = self
         
         let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
         self.viewControllers = [initialViewController!]
-        self.pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
+        pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
-        self.addChild(self.pageController)
+        self.addChild(pageController)
     }
     
     //MARK: Called after notification orientation changement
