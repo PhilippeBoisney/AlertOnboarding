@@ -84,7 +84,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
         self.backgroundColor = colorForAlertViewBackground
         self.buttonBottom.setTitleColor(colorButtonText, for: UIControl.State())
-        self.buttonBottom.setTitle(self.titleSkipButton, for: UIControl.State())
+        self.buttonBottom.setTitle(titleSkipButton, for: UIControl.State())
         
         self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
         self.container.delegate = self
@@ -221,13 +221,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: BUTTON ACTIONS
     
     @objc func onClick(){
-        self.hide()
+        hide()
     }
     
     //MARK: ALERTPAGEVIEWDELEGATE
     
     func nextStep(_ step: Int) {
-        self.delegate?.alertOnboardingNext(step)
+        delegate?.alertOnboardingNext(step)
     }
     
     //MARK: OTHERS
@@ -242,13 +242,13 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: NOTIFICATIONS PROCESS
     fileprivate func interceptOrientationChange(){
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(AlertOnboarding.onOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     @objc func onOrientationChange(){
-        if let superview = self.superview {
-            self.configureConstraints(superview)
-            self.container.configureConstraintsForPageControl()
+        if let superview = superview {
+            configureConstraints(superview)
+            container.configureConstraintsForPageControl()
         }
     }
 }

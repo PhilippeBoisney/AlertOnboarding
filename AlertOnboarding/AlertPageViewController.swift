@@ -108,13 +108,13 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         //FROM COCOAPOD
         if let bundleURL = podBundle.url(forResource: "AlertOnboardingXib", withExtension: "bundle") {
             if let bundle = Bundle(url: bundleURL) {
-                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
+                pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? AlertChildPageViewController
             } else {
                 assertionFailure("Could not load the bundle.. Please re-install AlertOnboarding via Cocoapod or install it manually.")
             }
             //FROM MANUAL INSTALL
-        }else {
-            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AlertChildPageViewController
+        } else {
+            pageContentViewController = UINib(nibName: "AlertChildPageViewController", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? AlertChildPageViewController
         }
         
         pageContentViewController.pageIndex = index // 0
@@ -131,7 +131,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
+        guard let controllers = pageViewController.viewControllers, !controllers.isEmpty else { return }
+        guard let pageContentViewController = controllers[0] as? AlertChildPageViewController else { return }
+
         let index = pageContentViewController.pageIndex
         self.currentStep = (arrayOfImage.count - index - 1)
         self.delegate?.nextStep(self.currentStep)
