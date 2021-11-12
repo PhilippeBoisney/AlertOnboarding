@@ -81,34 +81,34 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open func show() {
         
         //Update Color
-        self.buttonBottom.backgroundColor = colorButtonBottomBackground
-        self.backgroundColor = colorForAlertViewBackground
-        self.buttonBottom.setTitleColor(colorButtonText, for: UIControl.State())
-        self.buttonBottom.setTitle(titleSkipButton, for: UIControl.State())
+        buttonBottom.backgroundColor = colorButtonBottomBackground
+        backgroundColor = colorForAlertViewBackground
+        buttonBottom.setTitleColor(colorButtonText, for: UIControl.State())
+        buttonBottom.setTitle(titleSkipButton, for: UIControl.State())
         
-        self.container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
-        self.container.delegate = self
-        self.insertSubview(self.container.view, aboveSubview: self)
-        self.insertSubview(self.buttonBottom, aboveSubview: self)
+        container = AlertPageViewController(arrayOfImage: arrayOfImage, arrayOfTitle: arrayOfTitle, arrayOfDescription: arrayOfDescription, alertView: self)
+        container.delegate = self
+        insertSubview(container.view, aboveSubview: self)
+        insertSubview(buttonBottom, aboveSubview: self)
         
         // Only show once
-        if self.superview != nil {
+        if superview != nil {
             return
         }
         
         // Find current stop viewcontroller
         if let topController = getTopViewController() {
             let superView: UIView = topController.view
-            superView.addSubview(self.background)
+            superView.addSubview(background)
             superView.addSubview(self)
-            self.configureConstraints(topController.view)
-            self.animateForOpening()
+            configureConstraints(topController.view)
+            animateForOpening()
         }
     }
     
     //Hide onboarding with animation
     open func hide(){
-        self.checkIfOnboardingWasSkipped()
+        checkIfOnboardingWasSkipped()
         DispatchQueue.main.async { () -> Void in
             self.animateForEnding()
         }
@@ -121,12 +121,12 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     //MARK: Check if onboarding was skipped
     fileprivate func checkIfOnboardingWasSkipped(){
-        let currentStep = self.container.currentStep
-        if currentStep < (self.container.arrayOfImage.count - 1) && !self.container.isCompleted{
-            self.delegate?.alertOnboardingSkipped(currentStep, maxStep: self.container.maxStep)
+        let currentStep = container.currentStep
+        if currentStep < (container.arrayOfImage.count - 1) && !container.isCompleted{
+            delegate?.alertOnboardingSkipped(currentStep, maxStep: container.maxStep)
         }
         else {
-            self.delegate?.alertOnboardingCompleted()
+            delegate?.alertOnboardingCompleted()
         }
     }
     
@@ -134,51 +134,51 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //MARK: FOR CONFIGURATION
     fileprivate func configure(_ arrayOfImage: [String], arrayOfTitle: [String], arrayOfDescription: [String]) {
         
-        self.buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
-        self.buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
-        self.buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), for: .touchUpInside)
+        buttonBottom = UIButton(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
+        buttonBottom.titleLabel?.font = UIFont(name: "Avenir-Black", size: 15)
+        buttonBottom.addTarget(self, action: #selector(AlertOnboarding.onClick), for: .touchUpInside)
         
-        self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
-        self.background.backgroundColor = UIColor.black
-        self.background.alpha = 0.0
+        background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
+        background.backgroundColor = UIColor.black
+        background.alpha = 0.0
         
         
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 10
+        clipsToBounds = true
+        layer.cornerRadius = 10
     }
     
     
     fileprivate func configureConstraints(_ superView: UIView) {
         
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.buttonBottom.translatesAutoresizingMaskIntoConstraints = false
-        self.container.view.translatesAutoresizingMaskIntoConstraints = false
-        self.background.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
+        buttonBottom.translatesAutoresizingMaskIntoConstraints = false
+        container.view.translatesAutoresizingMaskIntoConstraints = false
+        background.translatesAutoresizingMaskIntoConstraints = false
         
-        self.removeConstraints(self.constraints)
-        self.buttonBottom.removeConstraints(self.buttonBottom.constraints)
-        self.container.view.removeConstraints(self.container.view.constraints)
+        removeConstraints(constraints)
+        buttonBottom.removeConstraints(buttonBottom.constraints)
+        container.view.removeConstraints(container.view.constraints)
         
         heightForAlertView = UIScreen.main.bounds.height*percentageRatioHeight
         widthForAlertView = UIScreen.main.bounds.width*percentageRatioWidth
         
         //Constraints for alertview
         let horizontalContraintsAlertView = NSLayoutConstraint(item: self, attribute: .centerXWithinMargins, relatedBy: .equal, toItem: superView, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
-        let verticalContraintsAlertView = NSLayoutConstraint(item: self, attribute:.centerYWithinMargins, relatedBy: .equal, toItem: superView, attribute: .centerYWithinMargins, multiplier: 1.0, constant: 0)
+        let verticalContraintsAlertView = NSLayoutConstraint(item: self, attribute: .centerYWithinMargins, relatedBy: .equal, toItem: superView, attribute: .centerYWithinMargins, multiplier: 1.0, constant: 0)
         let heightConstraintForAlertView = NSLayoutConstraint.init(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView)
         let widthConstraintForAlertView = NSLayoutConstraint.init(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
         
         //Constraints for button
-        let verticalContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
-        let heightConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView*0.1)
-        let widthConstraintForButtonBottom = NSLayoutConstraint.init(item: self.buttonBottom, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
-        let pinContraintsButtonBottom = NSLayoutConstraint(item: self.buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0)
+        let verticalContraintsButtonBottom = NSLayoutConstraint(item: buttonBottom, attribute: .centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
+        let heightConstraintForButtonBottom = NSLayoutConstraint.init(item: buttonBottom, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView*0.1)
+        let widthConstraintForButtonBottom = NSLayoutConstraint.init(item: buttonBottom, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
+        let pinContraintsButtonBottom = NSLayoutConstraint(item: buttonBottom, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0)
         
         //Constraints for container
-        let verticalContraintsForContainer = NSLayoutConstraint(item: self.container.view, attribute:.centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
-        let heightConstraintForContainer = NSLayoutConstraint.init(item: self.container.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView*0.9)
-        let widthConstraintForContainer = NSLayoutConstraint.init(item: self.container.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
-        let pinContraintsForContainer = NSLayoutConstraint(item: self.container.view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0)
+        let verticalContraintsForContainer = NSLayoutConstraint(item: container.view, attribute: .centerXWithinMargins, relatedBy: .equal, toItem: self, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)
+        let heightConstraintForContainer = NSLayoutConstraint.init(item: container.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightForAlertView*0.9)
+        let widthConstraintForContainer = NSLayoutConstraint.init(item: container.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: widthForAlertView)
+        let pinContraintsForContainer = NSLayoutConstraint(item: container.view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0)
         
         
         //Constraints for background
@@ -193,8 +193,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     
     //MARK: FOR ANIMATIONS
     fileprivate func animateForOpening() {
-        self.alpha = 1.0
-        self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+        alpha = 1.0
+        transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
         UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { [weak self] in
             guard let self = self else { return }
 
