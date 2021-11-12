@@ -76,7 +76,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex!
+        var index = (viewController as! AlertChildPageViewController).pageIndex
         
         if(index == 0){
             return nil
@@ -88,7 +88,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex!
+        var index = (viewController as! AlertChildPageViewController).pageIndex
         
         index += 1
         
@@ -133,7 +133,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0] as! AlertChildPageViewController
         let index = pageContentViewController.pageIndex
-        self.currentStep = (arrayOfImage.count - index! - 1)
+        self.currentStep = (arrayOfImage.count - index - 1)
         self.delegate?.nextStep(self.currentStep)
         //Check if user watching the last step
         if currentStep == arrayOfImage.count - 1 {
@@ -144,7 +144,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             self.maxStep = currentStep
         }
         if pageControl != nil {
-            pageControl.currentPage = arrayOfImage.count - index! - 1
+            pageControl.currentPage = arrayOfImage.count - index - 1
             if pageControl.currentPage == arrayOfImage.count - 1 {
                 self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControl.State())
             } else {
