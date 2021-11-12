@@ -109,8 +109,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     //Hide onboarding with animation
     open func hide(){
         checkIfOnboardingWasSkipped()
-        DispatchQueue.main.async { () -> Void in
-            self.animateForEnding()
+        DispatchQueue.main.async { [weak self] in
+            self?.animateForEnding()
         }
     }
     
