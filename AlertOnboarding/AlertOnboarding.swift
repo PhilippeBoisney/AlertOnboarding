@@ -43,8 +43,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     open var heightForAlertView: CGFloat!
     open var widthForAlertView: CGFloat!
     
-    open var percentageRatioHeight: CGFloat = 0.8
-    open var percentageRatioWidth: CGFloat = 0.8
+    open var heightRatio: CGFloat = 0.8
+    open var widthRatio: CGFloat = 0.8
     
     open var titleSkipButton = "SKIP"
     open var titleGotItButton = "GOT IT !"
@@ -159,8 +159,8 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         buttonBottom.removeConstraints(buttonBottom.constraints)
         container.view.removeConstraints(container.view.constraints)
         
-        heightForAlertView = UIScreen.main.bounds.height*percentageRatioHeight
-        widthForAlertView = UIScreen.main.bounds.width*percentageRatioWidth
+        heightForAlertView = UIScreen.main.bounds.height * heightRatio
+        widthForAlertView = UIScreen.main.bounds.width * widthRatio
         
         //Constraints for alertview
         let horizontalContraintsAlertView = NSLayoutConstraint(item: self, attribute: .centerXWithinMargins, relatedBy: .equal, toItem: superView, attribute: .centerXWithinMargins, multiplier: 1.0, constant: 0)

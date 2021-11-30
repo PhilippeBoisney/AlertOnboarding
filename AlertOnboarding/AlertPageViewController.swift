@@ -199,7 +199,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     //MARK: Called after notification orientation changement
     func configureConstraintsForPageControl() {
-        let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.percentageRatioHeight
+        let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.heightRatio
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
         self.pageControl.frame = CGRect(x: 0, y: positionX, width: self.view.bounds.width, height: 50)
     }
