@@ -21,7 +21,15 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         return pageController
     }()
 
-    var pageControl: UIPageControl!
+    var pageControl: UIPageControl = {
+        let pageControl = UIPageControl(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
+        pageControl.backgroundColor = UIColor.clear
+        
+        pageControl.currentPage = 0
+        pageControl.isEnabled = false
+        return pageControl
+    }()
+    
     var alertview: AlertOnboarding
     
     //FOR DATA
@@ -145,13 +153,12 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         if currentStep > self.maxStep {
             self.maxStep = currentStep
         }
-        if pageControl != nil {
-            pageControl.currentPage = arrayOfImage.count - index - 1
-            if pageControl.currentPage == arrayOfImage.count - 1 {
-                self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControl.State())
-            } else {
-                self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControl.State())
-            }
+        
+        pageControl.currentPage = arrayOfImage.count - index - 1
+        if pageControl.currentPage == arrayOfImage.count - 1 {
+            self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControl.State())
+        } else {
+            self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControl.State())
         }
     }
     
@@ -166,15 +173,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     //MARK: CONFIGURATION ---------------------------------------------------------------------------------
     fileprivate func configurePageControl() {
-        self.pageControl = UIPageControl(frame: CGRect(x: 0,y: 0,width: 0,height: 0))
-        self.pageControl.backgroundColor = UIColor.clear
-        self.pageControl.pageIndicatorTintColor = alertview.colorPageIndicator
-        self.pageControl.currentPageIndicatorTintColor = alertview.colorCurrentPageIndicator
-        self.pageControl.numberOfPages = arrayOfImage.count
-        self.pageControl.currentPage = 0
-        self.pageControl.isEnabled = false
+        pageControl.pageIndicatorTintColor = alertview.colorPageIndicator
+        pageControl.currentPageIndicatorTintColor = alertview.colorCurrentPageIndicator
+        pageControl.numberOfPages = arrayOfImage.count
         
-        self.configureConstraintsForPageControl()
+        configureConstraintsForPageControl()
     }
     
     fileprivate func configurePageViewController(){
