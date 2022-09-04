@@ -61,13 +61,13 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configurePageViewController()
-        self.configurePageControl()
+        configurePageViewController()
+        configurePageControl()
         
-        self.view.backgroundColor = UIColor.clear
-        self.view.addSubview(self.pageController.view)
-        self.view.addSubview(self.pageControl)
-        self.pageController.didMove(toParent: self)
+        view.backgroundColor = UIColor.clear
+        view.addSubview(pageController.view)
+        view.addSubview(pageControl)
+        pageController.didMove(toParent: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +91,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         }
         
         index -= 1
-        return self.viewControllerAtIndex(index)
+        return viewControllerAtIndex(index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -104,14 +104,14 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             return nil
         }
         
-        return self.viewControllerAtIndex(index)
+        return viewControllerAtIndex(index)
     }
     
     
     func viewControllerAtIndex(_ index : Int) -> UIViewController? {
         
         var pageContentViewController: AlertChildPageViewController!
-        let podBundle = Bundle(for: self.classForCoder)
+        let podBundle = Bundle(for: classForCoder)
         
         //FROM COCOAPOD
         if let bundleURL = podBundle.url(forResource: "AlertOnboardingXib", withExtension: "bundle") {
@@ -143,11 +143,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         guard let pageContentViewController = controllers[0] as? AlertChildPageViewController else { return }
 
         let index = pageContentViewController.pageIndex
-        self.currentStep = (arrayOfImage.count - index - 1)
-        self.delegate?.nextStep(self.currentStep)
+        currentStep = (arrayOfImage.count - index - 1)
+        delegate?.nextStep(currentStep)
         //Check if user watching the last step
         if currentStep == arrayOfImage.count - 1 {
-            self.isCompleted = true
+            isCompleted = true
         }
         //Remember the last screen user have seen
         if currentStep > self.maxStep {
@@ -156,9 +156,9 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         pageControl.currentPage = arrayOfImage.count - index - 1
         if pageControl.currentPage == arrayOfImage.count - 1 {
-            self.alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControl.State())
+            alertview.buttonBottom.setTitle(alertview.titleGotItButton, for: UIControl.State())
         } else {
-            self.alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControl.State())
+            alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControl.State())
         }
     }
     
@@ -193,8 +193,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         pageController.dataSource = self
         pageController.delegate = self
         
-        let initialViewController = self.viewControllerAtIndex(arrayOfImage.count-1)
-        self.viewControllers = [initialViewController!]
+        let initialViewController = viewControllerAtIndex(arrayOfImage.count-1)
+        viewControllers = [initialViewController!]
         pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
         self.addChild(pageController)
@@ -204,6 +204,6 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     func configureConstraintsForPageControl() {
         let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.heightRatio
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
-        self.pageControl.frame = CGRect(x: 0, y: positionX, width: self.view.bounds.width, height: 50)
+        pageControl.frame = CGRect(x: 0, y: positionX, width: view.bounds.width, height: 50)
     }
 }
