@@ -210,20 +210,17 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
             self.alpha = 0.0
             self.background.alpha = 0.0
             }, completion: { [weak self] finished in
-                // On main thread
-                self?.endingAnimationCompleted()
+                DispatchQueue.main.async { [weak self] in
+                    self?.endingAnimationCompleted()
+                }
         })
     }
 
     private func endingAnimationCompleted() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-
-            self.background.removeFromSuperview()
-            self.removeFromSuperview()
-            self.container.removeFromParent()
-            self.container.view.removeFromSuperview()
-        }
+        background.removeFromSuperview()
+        removeFromSuperview()
+        container.removeFromParent()
+        container.view.removeFromSuperview()
     }
     
     //MARK: BUTTON ACTIONS

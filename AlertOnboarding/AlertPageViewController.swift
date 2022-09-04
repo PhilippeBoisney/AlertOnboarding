@@ -150,8 +150,8 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             isCompleted = true
         }
         //Remember the last screen user have seen
-        if currentStep > self.maxStep {
-            self.maxStep = currentStep
+        if currentStep > maxStep {
+            maxStep = currentStep
         }
         
         pageControl.currentPage = arrayOfImage.count - index - 1
@@ -161,7 +161,6 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             alertview.buttonBottom.setTitle(alertview.titleSkipButton, for: UIControl.State())
         }
     }
-    
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return arrayOfImage.count
@@ -185,7 +184,6 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
             let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [AlertPageViewController.self])
             pageControl.pageIndicatorTintColor = UIColor.clear
             pageControl.currentPageIndicatorTintColor = UIColor.clear
-            
         } else {
             // Fallback on earlier versions
         }
@@ -197,7 +195,7 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         viewControllers = [initialViewController!]
         pageController.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
-        self.addChild(pageController)
+        addChild(pageController)
     }
     
     //MARK: Called after notification orientation changement
