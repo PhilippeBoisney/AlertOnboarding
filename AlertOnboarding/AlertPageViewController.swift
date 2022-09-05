@@ -83,8 +83,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewController = viewController as? AlertChildPageViewController else {
+            return nil
+        }
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex
+        var index = viewController.pageIndex
         
         if(index == 0){
             return nil
@@ -95,8 +98,11 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let viewController = viewController as? AlertChildPageViewController else {
+            return nil
+        }
         
-        var index = (viewController as! AlertChildPageViewController).pageIndex
+        var index = viewController.pageIndex
         
         index += 1
         
