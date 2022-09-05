@@ -9,17 +9,17 @@
 import UIKit
 
 class AlertChildPageViewController: UIViewController {
-    
+
     var pageIndex: Int = 0
-    
+
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var labelMainTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
